@@ -296,4 +296,66 @@
       <div class="event-card">
         <img src="https://via.placeholder.com/250x150" alt="Event 1">
         <h4>Fall Picnic</h4>
-        <
+        <p>October 15, 2025</p>
+      </div>
+      <div class="event-card">
+        <img src="https://via.placeholder.com/250x150" alt="Event 2">
+        <h4>Yard Sale Weekend</h4>
+        <p>September 7, 2025</p>
+      </div>
+      <div class="event-card">
+        <img src="https://via.placeholder.com/250x150" alt="Event 3">
+        <h4>Holiday Decorating Contest</h4>
+        <p>December 10, 2025</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="resources" id="resources">
+    <h2>Resources & Documents</h2>
+    <div class="resource-grid">
+      <div class="resource-card">HOA Guidelines (PDF)</div>
+      <div class="resource-card">Meeting Minutes</div>
+      <div class="resource-card">Bylaws</div>
+      <div class="resource-card">Architectural Request Form</div>
+    </div>
+    <div style="margin-top: 2rem; text-align: center;">
+      <a href="https://facebook.com" target="_blank">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green)" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24h11.494v-9.294H9.691v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.658-4.788 1.325 0 2.464.099 2.796.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.407 24 22.676V1.325C24 .593 23.406 0 22.675 0z"/>
+        </svg>
+        Follow us on Facebook
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Cedardale HOA. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openMenu() {
+      sidebar.classList.add('open');
+      overlay.classList.add('visible');
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('visible');
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeMenu();
+      }
+    });
+
+    document.querySelectorAll('#sidebar a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+  </script>
+</body>
+</html>
