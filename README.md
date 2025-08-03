@@ -8,3 +8,4 @@ To-do:
 - Update resource links, event data, and facebook link
 - Write new about us text
 - Make logo a link
+- Maybe add a small tree icon in the logo image
