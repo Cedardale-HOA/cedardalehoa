@@ -13,7 +13,7 @@ function closeMenu() {
 
 document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
-    closeMenu();
+        closeMenu();
     }
 });
 

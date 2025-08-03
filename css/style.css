@@ -3,7 +3,7 @@
     --gray: #f4f4f4;
     --green: #4c6b4a;
     --green-dark: #3a523a;
-    --light-green: #eaf2e9;
+    --green-light: #eaf2e9;
 }
 
 * {
@@ -201,7 +201,7 @@ nav a:focus, nav a:hover {
 }
 
 .hero {
-    background: linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.2) ), url('../images/downtown-knoxville.jpg') no-repeat center center/cover;
+    background: linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.2) ), url('../images/downtown-knoxville-min.jpg') no-repeat center center/cover;
     color: white;
     padding: 6rem 3rem;
     position: relative;
@@ -295,7 +295,7 @@ section {
 }
 
 #resources {
-    background: var(--light-green);
+    background: var(--green-light);
 }
 
 #resources .resource-grid {
@@ -329,7 +329,6 @@ section {
     display: flex;
     gap: 0.5rem;
     justify-content: center;
-    margin-top: 1rem;
     text-decoration: none;
 }
 
@@ -342,4 +341,24 @@ footer {
     color: white;
     padding: 2rem;
     text-align: center;
+}
+
+#announcement {
+    background: var(--green-light);
+    padding: 2rem;
+}
+
+#announcement .announcement {
+    margin: 0 auto;
+    max-width: 550px;
+}
+
+#announcement .announcement-header {
+    align-items: center;
+    display: flex;
+    gap: .5rem;
+    margin-bottom: .75rem;
+}
+#announcement .announcement-header svg {
+    flex-shrink: 0;
 }
