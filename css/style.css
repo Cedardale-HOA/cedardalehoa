@@ -122,6 +122,9 @@ nav a {
     font-weight: 600;
     text-decoration: none;
 }
+nav a:focus, nav a:hover {
+    text-decoration: underline;
+}
 
 .hamburger {
     cursor: pointer;
@@ -172,6 +175,10 @@ nav a {
     font-size: 1.2rem;
     padding: .5rem 1rem;
     text-decoration: none;
+}
+
+.sidebar a:focus, .sidebar a:hover {
+    text-decoration: underline;
 }
 
 .sidebar-close svg {
