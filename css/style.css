@@ -334,6 +334,8 @@ section {
 
 #resources hr {
     border-top-color: var(--green-dark);
+    margin: 0 auto;
+    max-width: 500px;
 }
 
 footer {
