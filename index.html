@@ -3,311 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cedardale HOA</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --dark: #333;
-      --gray: #f4f4f4;
-      --green: #4c6b4a;
-      --light-green: #eaf2e9;
-    }
-    
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-      scroll-behavior: smooth;
-    }
+  <title>Cedardale Neighborhood HOA - Knoxville, TN</title>
 
-    body {
-      background: #fff;
-      color: var(--dark);
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
 
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 0;
-    }
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/style.css" />
 
-    hr {
-      margin: 2rem 0
-    }
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
-    .button {
-      background: var(--green);
-      border-radius: 5px;
-      color: white;
-      display: inline-block;
-      font-weight: 600;
-      padding: 0.75rem 1.5rem;
-      text-decoration: none;
-    }
-
-    header {
-      align-items: center;
-      background: #fff;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      justify-content: space-between;
-      padding: 1rem;
-      position: relative;
-      top: 0;
-      z-index: 10;
-    }
-
-    .logo {
-      display: flex;
-    }
-
-    nav {
-      align-items: center;
-      display: flex;
-      gap: 2rem;
-    }
-
-    @media (max-width: 767px) {
-      nav {
-        display: none;
-      }
-    }
-
-    nav a {
-      color: var(--dark);
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .hamburger {
-      cursor: pointer;
-      display: none;
-    }
-
-    @media (max-width: 767px) {
-      .hamburger {
-        display: block;
-      }
-    }
-
-    .sidebar {
-      background: #fff;
-      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-      height: 100vh;
-      padding: 1rem;
-      position: fixed;
-      right: -100%;
-      top: 0;
-      transition: right 0.3s ease;
-      width: 250px;
-      z-index: 100;
-    }
-
-    .sidebar.open {
-      right: 0;
-    }
-
-    .sidebar-header {
-      display: flex;
-      justify-content: flex-end;
-      padding: 1rem;
-     position: absolute;
-      right: 0;
-      top: 0;
-    }
-
-    .sidebar-links {
-      display: flex;
-      flex-direction: column;
-      gap: .5rem;
-      padding-top: 1rem;
-    }
-
-    .sidebar a {
-      color: inherit;
-      font-size: 1.2rem;
-      padding: .5rem 1rem;
-      text-decoration: none;
-    }
-
-    .sidebar-close svg {
-      cursor: pointer;
-      fill: var(--dark);
-      height: 24px;
-      width: 24px;
-    }
-
-    .overlay {
-      background: rgba(0, 0, 0, 0.3);
-      display: none;
-      inset: 0;
-      position: fixed;
-      z-index: 90;
-    }
-
-    .overlay.visible {
-      display: block;
-    }
-
-    .hero {
-      background: linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.2) ), url('https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTiA6kexz1y6hcz-H2SeHFFahtPHnkyNAuCE7LXE-2slsIOmiYF2SJ5L_b_L3N5uMAHPxo0j4hZliXqossFzi4-10lYTPJIZ_XYy8qzsQ') no-repeat center center/cover;
-      color: white;
-      padding: 4rem 2rem;
-      position: relative;
-      text-align: center;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      font-style: italic;
-      margin-bottom: .25rem;
-    }
-
-    .hero h1 {
-      font-size: 2.5rem;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-
-    .cta-buttons {
-      align-items: center;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 1rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    section {
-      padding: 3rem 1rem;
-    }
-
-    .about {
-      align-items: center;
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    @media (max-width: 767px) {
-      .about {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .about p {
-      margin-bottom: 0;
-    }
-
-    .about img {
-      border-radius: 10px;
-      margin: 0 auto;
-      max-width: 500px;
-      width: 100%;
-    }
-
-    .events {
-      background: var(--gray);
-    }
-
-    .event-carousel {
-      counter-reset: card;
-      display: flex;
-      gap: 1.5rem;
-      overflow-x: auto;
-      padding: 1rem 1rem 0;
-    }
-
-    .event-card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-      min-width: 250px;
-      padding: 1rem;
-      position: relative;
-    }
-
-    .event-card::before {
-      align-items: center;
-      background: var(--green);
-      border-radius: 50%;
-      color: white;
-      content: counter(card);
-      counter-increment: card;
-      display: flex;
-      font-weight: bold;
-      height: 30px;
-      justify-content: center;
-      left: -10px;
-      position: absolute;
-      top: -10px;
-      width: 30px;
-    }
-
-    .resources {
-      background: var(--light-green);
-    }
-
-    .resource-grid {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    }
-
-    .resource-card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
-      padding: 1rem;
-      text-align: center;
-    }
-
-    .resources .facebook-link {
-      align-items: center;
-      color: var(--green);
-      display: flex;
-      gap: 0.5rem;
-      justify-content: center;
-      margin-top: 1rem;
-      text-decoration: none;
-    }
-
-    footer {
-      background: #222;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    @media (max-width: 767px) {
-      .hamburger {
-        display: block;
-      }
-
-      .about {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <link rel="preload" fetchpriority="high" as="image" href="images/cedardale-logo-transaprent-min.png">
+  
+  <script defer src="js/script.js"></script>
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="images/cedardale-logo-transaprent-min.png" alt="Cedardale Homeowners' Association" width="175" />
-    </div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#events">Events</a>
-      <a href="#resources">Resources</a>
-    </nav>
-    <div class="hamburger" onclick="openMenu()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
-        <path d="M20 7L4 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M20 12L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M20 17L4 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo">
+          <a href="/" title="Home">
+            <img src="images/cedardale-logo-300w.png" alt="Cedardale Homeowners' Association" width="300" height="77" />
+          </a>
+        </div>
+        <nav>
+          <a href="#about">About</a>
+          <a href="#events">Events</a>
+          <a href="#resources">Resources</a>
+        </nav>
+        <div class="hamburger" onclick="openMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <path d="M20 7L4 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M20 12L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M20 17L4 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -326,25 +58,30 @@
   <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
   <section class="hero">
-    <p>Welcome to</p>
-    <h1>Cedardale Neighborhood HOA</h1>
-    <div class="cta-buttons">
-      <a href="#resources" class="button">View Resources</a>
-      <a href="#events" class="button">Upcoming Events</a>
+    <div class="container">
+      <p>Welcome to</p>
+      <h1>Cedardale Neighborhood HOA</h1>
+      <div class="cta-buttons">
+        <a href="#resources" class="button">View Resources</a>
+        <a href="#events" class="button">Upcoming Events</a>
+      </div>
     </div>
   </section>
 
   <section id="about">
-    <div class="about">
-      <div>
-        <h2>About the HOA</h2>
-        <p>The Cedardale HOA is dedicated to fostering a safe, vibrant, and connected community in the heart of Tennessee. We manage community standards, organize events, and ensure our neighborhood stays beautiful.</p>
+    <div class="container">
+      <div class="about-inner">
+        <div>
+          <h2>About the HOA</h2>
+          <p>The Cedardale HOA is dedicated to fostering a safe, vibrant, and connected community in the heart of Tennessee. We manage community standards, organize events, and ensure our neighborhood stays beautiful.</p>
+        </div>
+        <img src="images/cedardale-front-banner.jpg" alt="Neighborhood image" width="500" height="281" />
       </div>
-      <img src="images/cedardale-banner.jpg" alt="Neighborhood image">
     </div>
   </section>
 
-  <section class="events" id="events">
+  <section id="events">
+    <div class="container">
     <h2>Community Events</h2>
     <div class="event-carousel">
       <div class="event-card">
@@ -360,9 +97,11 @@
         <p>December 10, 2025</p>
       </div>
     </div>
+  </div>
   </section>
 
-  <section class="resources" id="resources">
+  <section id="resources">
+    <div class="container">
     <h2>Resources & Documents</h2>
     <div class="resource-grid">
       <div class="resource-card">HOA Guidelines (PDF)</div>
@@ -371,43 +110,25 @@
       <div class="resource-card">Architectural Request Form</div>
     </div>
     <hr/>
-    <div style="margin-top: 2rem; text-align: center;">
-      <a href="https://facebook.com" class="facebook-link" target="_blank">
+    <div class="contact-links">
+      <a href="https://www.facebook.com/groups/690748179929570" class="contact-link" target="_blank">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green)" xmlns="http://www.w3.org/2000/svg">
           <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24h11.494v-9.294H9.691v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.658-4.788 1.325 0 2.464.099 2.796.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.407 24 22.676V1.325C24 .593 23.406 0 22.675 0z"/>
         </svg>
         <span>Follow on Facebook</span>
       </a>
+      <a href="mailto:cedardalehoa@gmail.com" class="contact-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="currentColor"/>
+        </svg>
+        <span>Send an Email</span>
+      </a>
     </div>
+  </div>
   </section>
 
   <footer>
     <p>&copy; 2025 Cedardale HOA. All rights reserved.</p>
   </footer>
-
-  <script>
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-
-    function openMenu() {
-      sidebar.classList.add('open');
-      overlay.classList.add('visible');
-    }
-
-    function closeMenu() {
-      sidebar.classList.remove('open');
-      overlay.classList.remove('visible');
-    }
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        closeMenu();
-      }
-    });
-
-    document.querySelectorAll('#sidebar a').forEach(link => {
-      link.addEventListener('click', closeMenu);
-    });
-  </script>
 </body>
 </html>
