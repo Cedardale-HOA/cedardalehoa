@@ -1,6 +1,6 @@
 :root {
     --dark: #333;
-    --gray: #f4f4f4;
+    --gray: #eeeeee;
     --green: #4c6b4a;
     --green-dark: #3a523a;
     --green-light: #eaf2e9;
@@ -361,6 +361,11 @@ section {
     text-align: center;
     text-decoration: none;
     width: 100%;
+}
+
+#resources .resource-card a:focus, #resources .resource-card a:hover {
+    color: var(--green);
+    font-weight: bold;
 }
 
 footer {
