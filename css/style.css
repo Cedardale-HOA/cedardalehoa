@@ -338,7 +338,7 @@ section {
     grid-template-columns: repeat(3, 1fr);
 }
 
-@media (max-width: 575px) {
+@media (max-width: 767px) {
     #resources .resource-grid {
         grid-template-columns: 1fr;
     }
@@ -359,45 +359,19 @@ section {
     gap: .5rem;
     padding: 1rem;
     text-align: center;
-}
-
-#resources .resource-card a svg {
-    height: 30px;
-    width: 30px;
-}
-
-#resources .contact-links {
-    align-items: center;
-    color: var(--green);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-    margin-top: 1rem;
     text-decoration: none;
-}
-
-#resources .contact-links .contact-link {
-    align-items: center;
-    color: var(--green);
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    text-decoration: none;
-}
-
-#resources hr {
-    border-top-color: var(--green-dark);
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 500px;
+    width: 100%;
 }
 
 footer {
-    background: #222;
+    background-color: var(--green-dark);
     color: white;
-    padding: 2rem;
+    padding: 2rem 1rem;
     text-align: center;
+}
+
+footer p {
+    margin: 0;
 }
 
 #announcement {
