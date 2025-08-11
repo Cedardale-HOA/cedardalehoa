@@ -1,3 +1,5 @@
+@import 'reset.css';
+
 :root {
     --dark: #333;
     --gray: #eeeeee;
@@ -220,11 +222,28 @@ nav a:focus, nav a:hover {
 }
 
 .hero {
-    background: linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.2) ), url('../images/downtown-knoxville-min.jpg') no-repeat center center/cover;
+    background-image: image-set(
+      url('../images/downtown-knoxville.webp') type('image/webp') 1x,
+      url('../images/downtown-knoxville.jpg') 1x
+    );
+    background-position: 50%;
+    background-size: cover;
     color: white;
     padding: 6rem 3rem;
     position: relative;
     text-align: center;
+    z-index: 1;
+}
+
+.hero::before {
+    background-image: linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.2) );
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
 }
 
 .hero p {
@@ -431,6 +450,12 @@ visibility: hidden
     transform: translateY( calc(-50% + 30px) );
     transition: opacity 0.3s ease, transform 0.3s ease;
     width: 90%;
+}
+
+@media (min-width: 576px) {
+    .modal-content {
+        min-width: 500px;
+    }
 }
 .modal.active .modal-content {
     opacity: 1;
