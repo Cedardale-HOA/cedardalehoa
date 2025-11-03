@@ -229,6 +229,8 @@ nav a:focus, nav a:hover {
     background-position: 50%;
     background-size: cover;
     color: white;
+    margin-bottom: -2rem;
+    overflow: hidden;
     padding: 6rem 3rem;
     position: relative;
     text-align: center;
@@ -245,6 +247,20 @@ nav a:focus, nav a:hover {
     top: 0;
     z-index: -1;
 }
+
+.hero svg {
+    bottom: 0;
+    height: 80px;
+    left: 0;
+    margin-bottom: -1px;
+    position: absolute;
+    right: 0;
+    width: 165%;
+}
+
+@media (min-width: 992px) { .hero svg {
+    transform: translateX(-8%);
+} }
 
 .hero p {
     font-style: italic;
