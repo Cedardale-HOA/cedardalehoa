@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cedardale Neighborhood Homeowners' Association in Knoxville, TN. Stay updated with community events, resources, and HOA documents." />
+  <title>Cedardale Neighborhood HOA - Knoxville, TN</title>
+
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* Balanced green palette - vibrant but not overwhelming */
+      --green: #4a7c59;
+      --green-dark: #3a6147;
+      --green-light: #edf4ef;
+      --green-accent: #5d9a6d;
+
+      /* Warm neutrals */
+      --cream: #f8f7f5;
+      --sand: #f3f2ee;
+      --text: #2a2a2a;
+      --text-secondary: #555;
+      --text-muted: #777;
+      --white: #ffffff;
+      --border: #e2e0dc;
+      --border-light: #eceae6;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+
+      --radius: 10px;
+      --radius-lg: 16px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--white);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text);
+    }
+
+    h1 { font-size: clamp(2rem, 5vw, 2.75rem); }
+    h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
+    h3 { font-size: 1.25rem; }
+    h4 { font-size: 1.1rem; }
+
+    p {
+      color: var(--text-secondary);
+    }
+
+    /* Section Layout */
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-header.centered {
+      text-align: center;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-header h2 {
+      margin-bottom: 0.75rem;
+    }
+
+    .section-header p {
+      font-size: 1.1rem;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-label svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--green);
+      background: var(--green-light);
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--green-dark);
+    }
+
+    .btn-white:hover {
+      background: var(--green-light);
+    }
+
+    .btn-outline-white {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.6);
+    }
+
+    .btn-outline-white:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--white);
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.875rem 0;
+    }
+
+    .logo img {
+      height: 42px;
+      width: auto;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    nav a {
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      transition: all 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--green);
+      background: var(--green-light);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      color: var(--text);
+    }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .hamburger { display: block; }
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 300px;
+      height: 100vh;
+      background: var(--white);
+      z-index: 1001;
+      padding: 1.5rem;
+      transition: right 0.3s ease;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .mobile-menu.open {
+      right: 0;
+    }
+
+    .mobile-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .mobile-menu-header span {
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .mobile-menu-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      color: var(--text);
+    }
+
+    .mobile-menu-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .mobile-menu-links a {
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 0.875rem 1rem;
+      border-radius: var(--radius);
+      color: var(--text-secondary);
+    }
+
+    .mobile-menu-links a:hover {
+      background: var(--green-light);
+      color: var(--green);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 9rem 1.5rem 5rem;
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+      color: var(--white);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 50%;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+    }
+
+    .hero-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-location svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .hero h1 {
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .hero-description {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    @media (max-width: 900px) {
+      .hero-image {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+    }
+
+    /* Quick Links */
+    .quick-links {
+      background: var(--cream);
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .quick-links-inner {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .quick-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.125rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .quick-link:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .quick-link svg {
+      width: 18px;
+      height: 18px;
+      color: var(--green);
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 0;
+    }
+
+    /* About */
+    #about {
+      background: var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    .about-image {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .about-list {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .about-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--green-light);
+      border-radius: var(--radius);
+    }
+
+    .about-item-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--white);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .about-item-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--green);
+    }
+
+    .about-item-text strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+
+    .about-item-text span {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Dues Section */
+    #dues {
+      background: var(--sand);
+    }
+
+    .dues-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (max-width: 800px) {
+      .dues-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .dues-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .dues-amount {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--green);
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+
+    .dues-amount .price {
+      font-size: 2.75rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .dues-amount .period {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-top: 0.25rem;
+    }
+
+    .dues-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .dues-info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.875rem 0;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.95rem;
+    }
+
+    .dues-info-row:last-child {
+      border-bottom: none;
+    }
+
+    .dues-info-label {
+      color: var(--text-muted);
+    }
+
+    .dues-info-value {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .dues-info-value a {
+      color: var(--green);
+    }
+
+    .dues-info-value a:hover {
+      text-decoration: underline;
+    }
+
+    .payment-section h3 {
+      margin-bottom: 1.25rem;
+    }
+
+    .payment-option {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .payment-option:hover {
+      border-color: var(--green);
+    }
+
+    .payment-option-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .payment-option-icon {
+      width: 46px;
+      height: 46px;
+      background: var(--green-light);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .payment-option-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--green);
+    }
+
+    .payment-option-title {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .payment-option-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .payment-option-details {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .payment-option-details p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+
+    .payment-option-details p + p {
+      margin-top: 0.5rem;
+    }
+
+    .payment-option-details strong {
+      color: var(--text);
+    }
+
+    .payment-help {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: var(--radius);
+      margin-top: 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .payment-help svg {
+      width: 20px;
+      height: 20px;
+      color: #d97706;
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+    }
+
+    .payment-help p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+
+    .payment-help a {
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    .payment-help a:hover {
+      text-decoration: underline;
+    }
+
+    /* Events */
+    #events {
+      background: var(--white);
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .event-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .event-card:hover {
+      box-shadow: var(--shadow);
+      border-color: var(--green);
+    }
+
+    .event-card-inner {
+      display: flex;
+    }
+
+    .event-date {
+      background: var(--green);
+      color: var(--white);
+      padding: 1rem 1.25rem;
+      text-align: center;
+      min-width: 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .event-date .month {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.9;
+    }
+
+    .event-date .day {
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .event-content {
+      padding: 1rem 1.25rem;
+      flex: 1;
+    }
+
+    .event-content h4 {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .event-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .event-time {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+
+    .event-time svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .event-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      margin-left: auto;
+    }
+
+    .event-badge.upcoming {
+      background: var(--green-light);
+      color: var(--green);
+    }
+
+    .event-badge.tentative {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    /* Newsletter */
+    #newsletter {
+      background: var(--green);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .newsletter-content {
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    .newsletter-content .section-label {
+      color: rgba(255,255,255,0.8);
+      justify-content: center;
+    }
+
+    .newsletter-content h2 {
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .newsletter-content p {
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 1.75rem;
+    }
+
+    /* Resources */
+    #resources {
+      background: var(--cream);
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .resource-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    .resource-card:hover {
+      border-color: var(--green);
+      box-shadow: var(--shadow);
+    }
+
+    .resource-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--green-light);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .resource-icon svg {
+      width: 26px;
+      height: 26px;
+      color: var(--green);
+    }
+
+    .resource-info h4 {
+      margin-bottom: 0.25rem;
+    }
+
+    .resource-info p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .resource-link {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--green);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+
+    .resource-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .resource-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact */
+    #contact {
+      background: var(--green-light);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .contact-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-card-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .contact-card-icon svg {
+      width: 26px;
+      height: 26px;
+      color: var(--white);
+    }
+
+    .contact-card h4 {
+      margin-bottom: 0.375rem;
+    }
+
+    .contact-card p {
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-card a {
+      color: var(--green);
+      font-weight: 500;
+      word-break: break-all;
+    }
+
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--text);
+      color: var(--white);
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-brand img {
+      height: 38px;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+
+    .footer-brand span {
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .footer-bottom {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      font-size: 0.875rem;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <a href="/" class="logo" aria-label="Cedardale HOA Home">
+          <picture>
+            <source srcset="images/cedardale-logo.webp" type="image/webp">
+            <img src="images/cedardale-logo.png" alt="Cedardale Neighborhood HOA" width="168" height="43">
+          </picture>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#about">About</a>
+          <a href="#dues">Pay Dues</a>
+          <a href="#events">Events</a>
+          <a href="#resources">Resources</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="hamburger" onclick="openMenu()" aria-label="Open navigation menu">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu">
+    <div class="mobile-menu-header">
+      <span>Menu</span>
+      <button class="mobile-menu-close" onclick="closeMenu()" aria-label="Close navigation menu">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="mobile-menu-links" aria-label="Mobile navigation">
+      <a href="#about" onclick="closeMenu()">About Us</a>
+      <a href="#dues" onclick="closeMenu()">Pay Dues</a>
+      <a href="#events" onclick="closeMenu()">Events Calendar</a>
+      <a href="#resources" onclick="closeMenu()">Documents & Resources</a>
+      <a href="#contact" onclick="closeMenu()">Contact the Board</a>
+    </nav>
+  </div>
+  <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-location">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Knoxville, Tennessee
+          </div>
+          <h1>Cedardale Neighborhood HOA</h1>
+          <p class="hero-description">Your community resource for neighborhood news, events, and HOA information. Find everything you need to stay connected with your neighbors.</p>
+          <div class="hero-buttons">
+            <a href="#dues" class="btn btn-white">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                <line x1="1" y1="10" x2="23" y2="10"/>
+              </svg>
+              Pay Your Annual Dues
+            </a>
+            <a href="#events" class="btn btn-outline-white">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              View 2026 Events
+            </a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <picture>
+            <source srcset="images/downtown-knoxville.webp" type="image/webp">
+            <img src="images/downtown-knoxville.jpg" alt="Downtown Knoxville, Tennessee" width="600" height="400" loading="eager">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <div class="quick-links">
+    <div class="container">
+      <div class="quick-links-inner">
+        <a href="https://drive.google.com/drive/folders/1IsF9oFqw8tBmtP2yyxM6UI-R2-z4XSR-?usp=sharing" target="_blank" rel="noopener" class="quick-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          HOA Documents
+        </a>
+        <a href="https://drive.google.com/drive/folders/1v-zi6AaeOhzBXzvarMnHoxYMWsll7br6?usp=drive_link" target="_blank" rel="noopener" class="quick-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+          Meeting Minutes
+        </a>
+        <a href="https://www.facebook.com/groups/690748179929570" target="_blank" rel="noopener" class="quick-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 2h-3a5 5 0 0 0-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+          Facebook Group
+        </a>
+        <a href="mailto:admin@cedardalehoa.com" class="quick-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          Email the Board
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <div class="section-header">
+            <div class="section-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+              About Our Community
+            </div>
+            <h2>Welcome to Cedardale</h2>
+            <p>The Cedardale Homeowners Association works to maintain a welcoming, well-kept neighborhood for all residents. We coordinate community events, manage shared spaces, and ensure our neighborhood remains a great place to live.</p>
+          </div>
+
+          <div class="about-list">
+            <div class="about-item">
+              <div class="about-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+              </div>
+              <div class="about-item-text">
+                <strong>Quarterly Board Meetings</strong>
+                <span>Open to all residents. Check the events section for upcoming dates.</span>
+              </div>
+            </div>
+            <div class="about-item">
+              <div class="about-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <div class="about-item-text">
+                <strong>Community Events</strong>
+                <span>Yard sales, block parties, and holiday activities throughout the year.</span>
+              </div>
+            </div>
+            <div class="about-item">
+              <div class="about-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                </svg>
+              </div>
+              <div class="about-item-text">
+                <strong>Transparent Records</strong>
+                <span>Meeting minutes and HOA documents available online anytime.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-image">
+          <picture>
+            <source srcset="images/cedardale-front-banner.webp" type="image/webp">
+            <img src="images/cedardale-front-banner.jpg" alt="Cedardale neighborhood entrance" width="500" height="281" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pay Dues Section -->
+  <section id="dues">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+            <line x1="1" y1="10" x2="23" y2="10"/>
+          </svg>
+          Annual Dues Payment
+        </div>
+        <h2>Pay Your HOA Dues</h2>
+        <p>Annual dues help maintain common areas and fund community events. See payment options below.</p>
+      </div>
+
+      <div class="dues-grid">
+        <div class="dues-card">
+          <div class="dues-amount">
+            <div class="price">$150</div>
+            <div class="period">per household, per year</div>
+          </div>
+          <div class="dues-info">
+            <div class="dues-info-row">
+              <span class="dues-info-label">Due Date</span>
+              <span class="dues-info-value">March 31, 2026</span>
+            </div>
+            <div class="dues-info-row">
+              <span class="dues-info-label">Billing Period</span>
+              <span class="dues-info-value">Jan 1 - Dec 31</span>
+            </div>
+            <div class="dues-info-row">
+              <span class="dues-info-label">Questions?</span>
+              <span class="dues-info-value"><a href="mailto:admin@cedardalehoa.com">Contact the Board</a></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-section">
+          <h3>How to Pay</h3>
+
+          <div class="payment-option">
+            <div class="payment-option-header">
+              <div class="payment-option-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              </div>
+              <div>
+                <div class="payment-option-title">Zelle (Recommended)</div>
+                <div class="payment-option-subtitle">Fast and free through your bank</div>
+              </div>
+            </div>
+            <div class="payment-option-details">
+              <p><strong>Send to:</strong> admin@cedardalehoa.com</p>
+              <p>Include your street address in the memo so we can credit your account.</p>
+            </div>
+          </div>
+
+          <div class="payment-option">
+            <div class="payment-option-header">
+              <div class="payment-option-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                  <line x1="1" y1="10" x2="23" y2="10"/>
+                </svg>
+              </div>
+              <div>
+                <div class="payment-option-title">Check</div>
+                <div class="payment-option-subtitle">Mail or hand-deliver</div>
+              </div>
+            </div>
+            <div class="payment-option-details">
+              <p><strong>Make check payable to:</strong> Cedardale HOA</p>
+              <p>Contact the board for the mailing address or to arrange drop-off.</p>
+            </div>
+          </div>
+
+          <div class="payment-help">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            <p><strong>Need a payment plan?</strong> Contact the board at <a href="mailto:admin@cedardalehoa.com">admin@cedardalehoa.com</a> to discuss options. We're happy to work with you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Section -->
+  <section id="events">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          2026 Calendar
+        </div>
+        <h2>Upcoming Events</h2>
+        <p>Mark your calendar for community gatherings and HOA meetings. All residents are welcome to attend board meetings.</p>
+      </div>
+
+      <div class="events-grid">
+        <article class="event-card">
+          <div class="event-card-inner">
+            <div class="event-date">
+              <span class="month">Apr</span>
+              <span class="day">13</span>
+            </div>
+            <div class="event-content">
+              <h4>Second Quarterly Board Meeting</h4>
+              <div class="event-meta">
+                <span class="event-time">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  7:00 - 8:30 PM
+                </span>
+                <span class="event-badge upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card">
+          <div class="event-card-inner">
+            <div class="event-date">
+              <span class="month">May</span>
+              <span class="day">23</span>
+            </div>
+            <div class="event-content">
+              <h4>Neighborhood Yard Sale</h4>
+              <div class="event-meta">
+                <span class="event-time">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  8:00 AM - 2:00 PM
+                </span>
+                <span class="event-badge upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card">
+          <div class="event-card-inner">
+            <div class="event-date">
+              <span class="month">Jul</span>
+              <span class="day">13</span>
+            </div>
+            <div class="event-content">
+              <h4>Third Quarterly Board Meeting</h4>
+              <div class="event-meta">
+                <span class="event-time">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  7:00 - 8:30 PM
+                </span>
+                <span class="event-badge upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card">
+          <div class="event-card-inner">
+            <div class="event-date">
+              <span class="month">Sep</span>
+              <span class="day">TBD</span>
+            </div>
+            <div class="event-content">
+              <h4>Fall Block Party</h4>
+              <div class="event-meta">
+                <span class="event-time">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  Time TBD
+                </span>
+                <span class="event-badge tentative">Date TBD</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card">
+          <div class="event-card-inner">
+            <div class="event-date">
+              <span class="month">Oct</span>
+              <span class="day">19</span>
+            </div>
+            <div class="event-content">
+              <h4>Fourth Quarterly Board Meeting</h4>
+              <div class="event-meta">
+                <span class="event-time">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  7:00 - 8:30 PM
+                </span>
+                <span class="event-badge upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card">
+          <div class="event-card-inner">
+            <div class="event-date">
+              <span class="month">Dec</span>
+              <span class="day">TBD</span>
+            </div>
+            <div class="event-content">
+              <h4>Holiday Lights Contest</h4>
+              <div class="event-meta">
+                <span class="event-time">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  Judging mid-December
+                </span>
+                <span class="event-badge tentative">Date TBD</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section id="newsletter">
+    <div class="container">
+      <div class="newsletter-content">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          Stay Informed
+        </div>
+        <h2>Get Email Updates</h2>
+        <p>Subscribe to receive occasional emails about community events, important announcements, and HOA news. We won't spam you.</p>
+        <a href="http://eepurl.com/jexX46" class="btn btn-white" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          Subscribe to Newsletter
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section id="resources">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          Documents & Resources
+        </div>
+        <h2>HOA Information</h2>
+        <p>Access important documents, meeting records, and community resources.</p>
+      </div>
+
+      <div class="resources-grid">
+        <a href="https://drive.google.com/drive/folders/1IsF9oFqw8tBmtP2yyxM6UI-R2-z4XSR-?usp=sharing" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div class="resource-info">
+            <h4>HOA Documents</h4>
+            <p>Bylaws, covenants, restrictions, and community guidelines.</p>
+            <span class="resource-link">
+              Open in Google Drive
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/1v-zi6AaeOhzBXzvarMnHoxYMWsll7br6?usp=drive_link" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+          </div>
+          <div class="resource-info">
+            <h4>Board Meeting Minutes</h4>
+            <p>Records from quarterly meetings, including decisions and discussions.</p>
+            <span class="resource-link">
+              Open in Google Drive
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <a href="https://www.facebook.com/groups/690748179929570" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 2h-3a5 5 0 0 0-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </div>
+          <div class="resource-info">
+            <h4>Facebook Group</h4>
+            <p>Connect with neighbors, share updates, and stay informed about news.</p>
+            <span class="resource-link">
+              Join the Group
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          Get in Touch
+        </div>
+        <h2>Contact the HOA Board</h2>
+        <p>Have questions, concerns, or suggestions? We're here to help.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <h4>Email</h4>
+          <p>Best for general questions and non-urgent matters.</p>
+          <a href="mailto:admin@cedardalehoa.com">admin@cedardalehoa.com</a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 2h-3a5 5 0 0 0-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </div>
+          <h4>Facebook</h4>
+          <p>Post in our group for quick responses from neighbors.</p>
+          <a href="https://www.facebook.com/groups/690748179929570" target="_blank" rel="noopener">Cedardale Facebook Group</a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <h4>Board Meetings</h4>
+          <p>Attend a quarterly meeting to speak with the board.</p>
+          <a href="#events">View meeting schedule</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <picture>
+            <source srcset="images/cedardale-logo.webp" type="image/webp">
+            <img src="images/cedardale-logo.png" alt="Cedardale HOA" width="150" height="38">
+          </picture>
+          <span>Knoxville, TN</span>
+        </div>
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#dues">Pay Dues</a>
+          <a href="#events">Events</a>
+          <a href="#resources">Resources</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Cedardale Neighborhood HOA. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function openMenu() {
+      document.getElementById('mobileMenu').classList.add('open');
+      document.getElementById('overlay').classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.getElementById('overlay').classList.remove('visible');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const headerOffset = 70;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+  </script>
+</body>
+
+</html>
