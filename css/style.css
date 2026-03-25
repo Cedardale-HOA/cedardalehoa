@@ -59,7 +59,12 @@ h6, .h6 {
 }
 
 p {
+<<<<<<< HEAD
     margin: 0 0 1rem;
+=======
+    margin-top: 0;
+    margin-bottom: 1rem;
+>>>>>>> main
 }
 
 hr {
@@ -229,11 +234,17 @@ nav a:focus, nav a:hover {
     background-position: 50%;
     background-size: cover;
     color: white;
+    margin-bottom: -2rem;
+    overflow: hidden;
     padding: 6rem 3rem;
     position: relative;
     text-align: center;
     z-index: 1;
 }
+
+@media (max-width: 767px) { .hero {
+    padding-top: 4rem;
+} }
 
 .hero::before {
     background-image: linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.2) );
@@ -245,6 +256,20 @@ nav a:focus, nav a:hover {
     top: 0;
     z-index: -1;
 }
+
+.hero svg {
+    bottom: 0;
+    height: 80px;
+    left: 0;
+    margin-bottom: -1px;
+    position: absolute;
+    right: 0;
+    width: 165%;
+}
+
+@media (min-width: 992px) { .hero svg {
+    transform: translateX(-8%);
+} }
 
 .hero p {
     font-style: italic;
@@ -408,8 +433,12 @@ footer p {
 }
 
 #announcement .announcement {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
     max-width: 550px;
+    padding: 1.5rem;
 }
 
 #announcement .announcement-header {
