@@ -1,0 +1,33 @@
+name: Hugo Build
+
+on:
+  push:
+    branches: [main, develop, 'feature/**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.152.2'
+          extended: false
+
+      - name: Build site
+        run: hugo --source "hugo-site" --destination "public" --minify
+
+      - name: Verify output exists
+        run: test -d public && ls -la public | head
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hugo-public
+          path: public

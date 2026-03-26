@@ -1,0 +1,10 @@
+{{ define "main" }}
+  <section class="container">
+    <article>
+      <h2>{{ .Title }}</h2>
+      <p><small>{{ .Date.Format "Jan 2, 2006" }}</small></p>
+      <div>{{ .Content }}</div>
+      <p><a href="/blog/">Back to Blog</a></p>
+    </article>
+  </section>
+{{ end }}

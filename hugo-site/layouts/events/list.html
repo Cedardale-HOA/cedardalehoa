@@ -1,0 +1,42 @@
+{{ define "main" }}
+  <section id="events" class="container">
+    <h2>Community Events</h2>
+
+    <h3>Upcoming Events</h3>
+    <div class="event-carousel">
+      {{ $upcoming := where (where .Site.RegularPages "Section" "events") ".Date" "ge" now }}
+      {{ if gt (len $upcoming) 0 }}
+        {{ range $upcoming.ByDate }}
+          <div class="event-card" data-status="upcoming">
+            <h4 class="event-card-title">{{ .Title }}</h4>
+            <p>{{ .Date.Format "Monday, January 2, 2006" }}</p>
+            <p>{{ .Summary }}</p>
+            <a class="button button-small button-light" href="{{ .Permalink }}">View Details</a>
+          </div>
+        {{ end }}
+      {{ else }}
+        <p>No upcoming events at this time.</p>
+      {{ end }}
+    </div>
+
+    <h3>Past Events</h3>
+    <div class="event-carousel">
+      {{ $ended := where (where .Site.RegularPages "Section" "events") ".Date" "lt" now }}
+      {{ if gt (len $ended) 0 }}
+        {{ $endedSorted := $ended.ByDate }}
+        {{ $endedLen := len $endedSorted }}
+        {{ range $idx := seq 0 (sub $endedLen 1) }}
+          {{ $event := index $endedSorted (sub (sub $endedLen 1) $idx) }}
+          <div class="event-card" data-status="ended">
+            <h4 class="event-card-title">{{ $event.Title }}</h4>
+            <p>{{ $event.Date.Format "Monday, January 2, 2006" }}</p>
+            <p>{{ $event.Summary }}</p>
+            <a class="button button-small button-light" href="{{ $event.Permalink }}">View Details</a>
+          </div>
+        {{ end }}
+      {{ else }}
+        <p>No past events.</p>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

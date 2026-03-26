@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <section id="blog" class="container">
+    <h2>Blog</h2>
+    {{ $posts := .Pages.ByDate }}
+    {{ $postsLen := len $posts }}
+    {{ if gt $postsLen 0 }}
+      {{ range $i := seq 0 (sub $postsLen 1) }}
+        {{ $post := index $posts (sub (sub $postsLen 1) $i) }}
+        <article>
+          <h3><a href="{{ $post.Permalink }}">{{ $post.Title }}</a></h3>
+          <p><small>{{ $post.Date.Format "Jan 2, 2006" }}</small></p>
+          <p>{{ $post.Summary }}</p>
+        </article>
+      {{ end }}
+    {{ else }}
+      <p>No posts yet.</p>
+    {{ end }}
+  </section>
+{{ end }}

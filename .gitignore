@@ -1,0 +1,8 @@
+# OS
+.DS_Store
+
+# Hadoop directories
+hugo-site/hugo-site/
+
+# Hugo build output
+hugo-site/public/

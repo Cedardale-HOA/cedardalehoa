@@ -1,0 +1,34 @@
+baseURL = "https://www.cedardalehoa.com/"
+languageCode = "en-us"
+title = "Cedardale Neighborhood HOA"
+disableKinds = ["RSS", "sitemap", "taxonomy", "taxonomyTerm"]
+
+[params]
+  description = "Cedardale Neighborhood Homeowners' Association in Knoxville, TN. Stay updated with community events, resources, and HOA documents."
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/#about"
+    weight = 20
+  [[menu.main]]
+    identifier = "events"
+    name = "Events"
+    url = "/events/"
+    weight = 30
+  [[menu.main]]
+    identifier = "resources"
+    name = "Resources"
+    url = "/#resources"
+    weight = 40
+  [[menu.main]]
+    identifier = "blog"
+    name = "Blog"
+    url = "/blog/"
+    weight = 50

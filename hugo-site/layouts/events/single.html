@@ -1,0 +1,8 @@
+{{ define "main" }}
+  <section id="event-detail" class="container">
+    <h2>{{ .Title }}</h2>
+    <p class="event-date">{{ .Date.Format "Monday, January 2, 2006" }}</p>
+    <div class="event-content">{{ .Content }}</div>
+    <p><a href="/">Back to home</a></p>
+  </section>
+{{ end }}
