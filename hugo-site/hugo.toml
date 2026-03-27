@@ -1,3 +1,24 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://www.cedardalehoa.com/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'Cedardale Neighborhood HOA'
+buildFuture = true
+
+[params]
+  description = "Cedardale Neighborhood Homeowners' Association in Knoxville, TN. Stay updated with community events, resources, and HOA documents."
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    identifier = "events"
+    name = "Events"
+    url = "/events/"
+    weight = 20
+  [[menu.main]]
+    identifier = "blog"
+    name = "Blog"
+    url = "/blog/"
+    weight = 30

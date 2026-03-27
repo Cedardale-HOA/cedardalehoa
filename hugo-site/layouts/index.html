@@ -32,14 +32,15 @@
     <div class="container">
       <h2>Upcoming Events</h2>
       <div class="event-carousel">
-        {{ $upcoming := where (where .Site.RegularPages "Section" "events") ".Date" "ge" now }}
+      {{ $allEvents := where .Site.RegularPages "Section" "events" }}
+      {{ $upcoming := where $allEvents "Params.status" "upcoming" }}
         {{ if gt (len $upcoming) 0 }}
           {{ range $upcoming.ByDate }}
             <div class="event-card" data-status="upcoming">
               <h4 class="event-card-title">{{ .Title }}</h4>
               <p>{{ .Date.Format "Monday, January 2, 2006" }}</p>
               <div class="event-card-details" style="display: none;">{{ .Summary }}</div>
-              <a class="button button-small button-light" href="{{ .Permalink }}">View Details</a>
+              <a class="button button-small button-light" href="{{ .RelPermalink }}">View Details</a>
             </div>
           {{ end }}
         {{ else }}
@@ -47,25 +48,6 @@
         {{ end }}
       </div>
 
-      <h2>Past Events</h2>
-      <div class="event-carousel">
-        {{ $ended := where (where .Site.RegularPages "Section" "events") ".Date" "lt" now }}
-        {{ if gt (len $ended) 0 }}
-          {{ $endedSorted := $ended.ByDate }}
-          {{ $endedLen := len $endedSorted }}
-          {{ range $idx := seq 0 (sub $endedLen 1) }}
-            {{ $event := index $endedSorted (sub (sub $endedLen 1) $idx) }}
-            <div class="event-card" data-status="ended">
-              <h4 class="event-card-title">{{ $event.Title }}</h4>
-              <p>{{ $event.Date.Format "Monday, January 2, 2006" }}</p>
-              <div class="event-card-details" style="display: none;">{{ $event.Summary }}</div>
-              <a class="button button-small button-light" href="{{ $event.Permalink }}">View Details</a>
-            </div>
-          {{ end }}
-        {{ else }}
-          <p>No ended events.</p>
-        {{ end }}
-      </div>
     </div>
   </section>
 

@@ -59,12 +59,8 @@ h6, .h6 {
 }
 
 p {
-<<<<<<< HEAD
-    margin: 0 0 1rem;
-=======
     margin-top: 0;
     margin-bottom: 1rem;
->>>>>>> main
 }
 
 hr {
@@ -109,6 +105,11 @@ button {
 .container {
     margin: 0 auto;
     max-width: 1200px;
+    padding: 0 1rem;
+}
+
+section .container {
+    max-width: 900px;
 }
 
 header .header-inner {
@@ -378,6 +379,95 @@ section {
 
 #events .event-card .button {
     margin-top: 1rem;
+}
+
+/* Event list styles */
+#events .event-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#events .event-item {
+    background: white;
+    border-left: 4px solid var(--green);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#events .event-item[data-status="ended"] {
+    border-left-color: var(--text-muted);
+    opacity: 0.75;
+}
+
+#events .event-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#events .event-item-title {
+    font-size: 1.15rem;
+    margin-bottom: 0.25rem;
+}
+
+#events .event-item-date {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+#events .event-item-summary {
+    margin-bottom: 0.75rem;
+}
+
+#events .event-item .button {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+}
+
+/* Past events collapsible section */
+#events .past-events-section {
+    margin-top: 2rem;
+}
+
+#events .past-events-heading {
+    background: var(--green-light);
+    border: 1px solid var(--green);
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 1rem;
+    user-select: none;
+}
+
+#events .past-events-heading:hover {
+    background: var(--green);
+    color: white;
+}
+
+#events details[open] .past-events-heading {
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+}
+
+#events details .event-list {
+    margin-top: 0;
+    padding: 1rem;
+    background: white;
+    border: 1px solid var(--green);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+}
+
+#events details .event-list .event-item {
+    border-left-color: var(--text-muted);
+    opacity: 0.75;
 }
 
 #resources .resource-grid {

@@ -6,6 +6,9 @@ disableKinds = ["RSS", "sitemap", "taxonomy", "taxonomyTerm"]
 [params]
   description = "Cedardale Neighborhood Homeowners' Association in Knoxville, TN. Stay updated with community events, resources, and HOA documents."
 
+[permalinks]
+  events = "/events/:slug/"
+
 [menu]
   [[menu.main]]
     identifier = "home"
