@@ -3,15 +3,22 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="robots" content="noindex" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Cedardale Neighborhood Homeowners' Association in Knoxville, TN. Stay updated with community events, resources, and HOA documents." />
   <title>Cedardale Neighborhood HOA - Knoxville, TN</title>
 
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+  <!--Google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Preloads -->
+  <link rel="preload" as="image" href="images/cedardale-logo.webp" type="image/webp">
+
+  <!-- Misc preconnects -->
+  <link rel="preconnect" href="https://www.statcounter.com" crossorigin>
 
   <style>
     /* Reset & Base */
@@ -128,6 +135,19 @@
     .section-label svg {
       width: 16px;
       height: 16px;
+    }
+
+    /* Scroll animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+      transition-delay: var(--anim-delay, 0ms);
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: none;
     }
 
     /* Buttons */
@@ -330,29 +350,34 @@
 
     /* Hero */
     .hero {
+        background-color: rgba(58, 97, 71);
+    padding: 9rem 1.5rem 5rem;
       position: relative;
-      padding: 9rem 1.5rem 5rem;
-      background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
       color: var(--white);
       overflow: hidden;
     }
 
-    .hero::before {
-      content: '';
+    @media (min-width: 901px) { .hero {
+        background-image: url('images/downtown-knoxville.webp');
+        background-size: cover;
+        background-position: center;
+    } }
+
+    @media (min-width: 901px) { .hero::before {
+    content: "";
+      background-image: linear-gradient(to right, rgba(58, 97, 71, 0.9) 50%, rgba(58, 97, 71, 0.7) 75%, transparent);
       position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 50%;
-    }
+      left: 0;
+      bottom: 0;
+      right: 0;
+      top: 0;
+    } }
 
     .hero::after {
       content: '';
       position: absolute;
-      bottom: -30%;
-      left: -10%;
+      top: -30%;
+      left: -20%;
       width: 400px;
       height: 400px;
       background: rgba(255,255,255,0.03);
@@ -421,6 +446,100 @@
       .hero-image {
         max-width: 500px;
         margin: 0 auto;
+      }
+    }
+
+    /* Hero next-event card */
+    .hero-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      color: var(--white);
+      align-self: center;
+      opacity: 0;
+      transition: opacity 0.65s ease;
+    }
+
+    .hero-card.loaded {
+      opacity: 1;
+    }
+
+    .hero-card-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-card-label svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .hero-card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .hero-card-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .hero-card-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .hero-card-meta-row svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    .hero-card-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      margin: 1.25rem 0;
+    }
+
+    .hero-card-link {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+
+    .hero-card-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .hero-card-link:hover {
+      color: var(--white);
+    }
+
+    @media (max-width: 900px) {
+      .hero-card {
+        display: none;
       }
     }
 
@@ -573,6 +692,14 @@
       color: var(--white);
     }
 
+    .dues-amount small {
+      font-size: 0.8rem;
+      font-style: italic;
+      opacity: 0.9;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
     .dues-amount .price {
       font-size: 2.75rem;
       font-weight: 700;
@@ -691,40 +818,6 @@
       color: var(--text);
     }
 
-    .payment-help {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      padding: 1rem;
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: var(--radius);
-      margin-top: 1.25rem;
-      font-size: 0.9rem;
-    }
-
-    .payment-help svg {
-      width: 20px;
-      height: 20px;
-      color: #d97706;
-      flex-shrink: 0;
-      margin-top: 0.125rem;
-    }
-
-    .payment-help p {
-      margin: 0;
-      color: var(--text-secondary);
-    }
-
-    .payment-help a {
-      color: var(--green);
-      font-weight: 500;
-    }
-
-    .payment-help a:hover {
-      text-decoration: underline;
-    }
-
     /* Events */
     #events {
       background: var(--white);
@@ -740,6 +833,7 @@
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
+      cursor: pointer;
       overflow: hidden;
       transition: all 0.2s ease;
     }
@@ -751,6 +845,7 @@
 
     .event-card-inner {
       display: flex;
+      height: 100%;
     }
 
     .event-date {
@@ -822,9 +917,84 @@
       color: var(--green);
     }
 
+    .event-badge.past {
+      background: #f3f4f6;
+      color: var(--text-muted);
+    }
+
     .event-badge.tentative {
       background: #fef3c7;
       color: #b45309;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      margin: 1rem;
+    }
+
+    .modal-header {
+      padding: 2rem 1.5rem 1rem;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .modal-body p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .modal-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .modal-body strong {
+      color: var(--text);
     }
 
     /* Newsletter */
@@ -854,7 +1024,7 @@
       margin-bottom: 1.75rem;
     }
 
-    /* Resources */
+    /* Resources + Contact (merged) */
     #resources {
       background: var(--cream);
     }
@@ -926,60 +1096,88 @@
       text-decoration: underline;
     }
 
-    /* Contact */
-    #contact {
-      background: var(--green-light);
+    /* Contact subsection (inside #resources) */
+    .contact-subsection {
+      margin-top: 3.5rem;
+      padding-top: 2.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-subsection-header {
+      margin-bottom: 1.75rem;
+    }
+
+    .contact-subsection-header h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .contact-subsection-header p {
+      font-size: 1rem;
     }
 
     .contact-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      max-width: 850px;
-      margin: 0 auto;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 650px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .contact-card {
       background: var(--white);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.75rem;
-      text-align: center;
-      box-shadow: var(--shadow-sm);
+      padding: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    .contact-card:hover {
+      border-color: var(--green);
+      box-shadow: var(--shadow);
     }
 
     .contact-card-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--green);
-      border-radius: 50%;
+      width: 46px;
+      height: 46px;
+      background: var(--green-light);
+      border-radius: var(--radius);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 1rem;
+      flex-shrink: 0;
     }
 
     .contact-card-icon svg {
-      width: 26px;
-      height: 26px;
-      color: var(--white);
-    }
-
-    .contact-card h4 {
-      margin-bottom: 0.375rem;
-    }
-
-    .contact-card p {
-      font-size: 0.9rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .contact-card a {
+      width: 22px;
+      height: 22px;
       color: var(--green);
-      font-weight: 500;
-      word-break: break-all;
     }
 
-    .contact-card a:hover {
+    .contact-card-body h4 {
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-card-body p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-card-body a {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--green);
+    }
+
+    .contact-card-body a:hover {
       text-decoration: underline;
     }
 
@@ -1037,7 +1235,6 @@
       border-top: 1px solid rgba(255,255,255,0.1);
       text-align: center;
       font-size: 0.875rem;
-      opacity: 0.5;
     }
   </style>
 </head>
@@ -1050,7 +1247,7 @@
         <a href="/" class="logo" aria-label="Cedardale HOA Home">
           <picture>
             <source srcset="images/cedardale-logo.webp" type="image/webp">
-            <img src="images/cedardale-logo.png" alt="Cedardale Neighborhood HOA" width="168" height="43">
+            <img src="images/cedardale-logo.png" alt="Cedardale Neighborhood HOA" width="168" height="43" decoding="async">
           </picture>
         </a>
         <nav aria-label="Main navigation">
@@ -1102,16 +1299,9 @@
             Knoxville, Tennessee
           </div>
           <h1>Cedardale Neighborhood HOA</h1>
-          <p class="hero-description">Your community resource for neighborhood news, events, and HOA information. Find everything you need to stay connected with your neighbors.</p>
+          <p class="hero-description">Your friendly community resource for neighborhood news, events, and HOA information. We're here to help make our neighborhood a wonderful place to live.</p>
           <div class="hero-buttons">
-            <a href="#dues" class="btn btn-white">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
-                <line x1="1" y1="10" x2="23" y2="10"/>
-              </svg>
-              Pay Your Annual Dues
-            </a>
-            <a href="#events" class="btn btn-outline-white">
+            <a href="#events" class="btn btn-white">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                 <line x1="16" y1="2" x2="16" y2="6"/>
@@ -1120,16 +1310,64 @@
               </svg>
               View 2026 Events
             </a>
+            <a href="#dues" class="btn btn-outline-white">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                <line x1="1" y1="10" x2="23" y2="10"/>
+              </svg>
+              Pay Your Annual Dues
+            </a>
+
           </div>
         </div>
-        <div class="hero-image">
-          <picture>
-            <source srcset="images/downtown-knoxville.webp" type="image/webp">
-            <img src="images/downtown-knoxville.jpg" alt="Downtown Knoxville, Tennessee" width="600" height="400" loading="eager">
-          </picture>
+        <div class="hero-card" id="hero-next-event">
+          <div class="hero-card-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            Coming Up Next
+          </div>
+          <div class="hero-card-title" id="hero-event-title"></div>
+          <div class="hero-card-meta">
+            <div class="hero-card-meta-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <span id="hero-event-date"></span>
+            </div>
+            <div class="hero-card-meta-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span id="hero-event-time"></span>
+            </div>
+            <div class="hero-card-meta-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span id="hero-event-location"></span>
+            </div>
+          </div>
+          <hr class="hero-card-divider">
+          <a href="#events" class="hero-card-link">
+            View all events
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
         </div>
       </div>
     </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 300" preserveAspectRatio="none" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 80px;">
+      <path fill="#fff" fill-opacity="1" d="M0,80L48,90C96,100,192,120,288,130C384,140,480,140,576,135C672,130,768,120,864,110C960,100,1056,90,1152,85C1248,80,1344,80,1392,80L1440,80L1440,300L1392,300C1344,300,1248,300,1152,300C1056,300,960,300,864,300C768,300,672,300,576,300C480,300,384,300,288,300C192,300,96,300,48,300L0,300Z"></path>
+    </svg>
   </section>
 
   <!-- Quick Links -->
@@ -1174,7 +1412,7 @@
     <div class="container">
       <div class="about-grid">
         <div>
-          <div class="section-header">
+          <div class="section-header animate-on-scroll">
             <div class="section-label">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
@@ -1183,11 +1421,11 @@
               About Our Community
             </div>
             <h2>Welcome to Cedardale</h2>
-            <p>The Cedardale Homeowners Association works to maintain a welcoming, well-kept neighborhood for all residents. We coordinate community events, manage shared spaces, and ensure our neighborhood remains a great place to live.</p>
+            <p>The Cedardale Homeowners Association is here to support a welcoming and well-maintained neighborhood where everyone can thrive. We organize community events and maintain shared spaces to enhance our quality of life.</p>
           </div>
 
           <div class="about-list">
-            <div class="about-item">
+            <div class="about-item animate-on-scroll" style="--anim-delay: 60ms">
               <div class="about-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
@@ -1198,10 +1436,10 @@
               </div>
               <div class="about-item-text">
                 <strong>Quarterly Board Meetings</strong>
-                <span>Open to all residents. Check the events section for upcoming dates.</span>
+                <span>Open to all residents. A great opportunity to connect and share ideas.</span>
               </div>
             </div>
-            <div class="about-item">
+            <div class="about-item animate-on-scroll" style="--anim-delay: 120ms">
               <div class="about-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -1212,10 +1450,10 @@
               </div>
               <div class="about-item-text">
                 <strong>Community Events</strong>
-                <span>Yard sales, block parties, and holiday activities throughout the year.</span>
+                <span>Yard sales, block parties, and holiday gatherings throughout the year.</span>
               </div>
             </div>
-            <div class="about-item">
+            <div class="about-item animate-on-scroll" style="--anim-delay: 180ms">
               <div class="about-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -1224,15 +1462,15 @@
               </div>
               <div class="about-item-text">
                 <strong>Transparent Records</strong>
-                <span>Meeting minutes and HOA documents available online anytime.</span>
+                <span>Meeting minutes and HOA documents available online for easy access.</span>
               </div>
             </div>
           </div>
         </div>
-        <div class="about-image">
+        <div class="about-image animate-on-scroll" style="--anim-delay: 100ms">
           <picture>
             <source srcset="images/cedardale-front-banner.webp" type="image/webp">
-            <img src="images/cedardale-front-banner.jpg" alt="Cedardale neighborhood entrance" width="500" height="281" loading="lazy">
+            <img src="images/cedardale-front-banner.jpg" alt="Cedardale neighborhood entrance" width="500" height="281" loading="lazy" decoding="async">
           </picture>
         </div>
       </div>
@@ -1242,7 +1480,7 @@
   <!-- Pay Dues Section -->
   <section id="dues">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header animate-on-scroll">
         <div class="section-label">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
@@ -1251,14 +1489,15 @@
           Annual Dues Payment
         </div>
         <h2>Pay Your HOA Dues</h2>
-        <p>Annual dues help maintain common areas and fund community events. See payment options below.</p>
+        <p>Annual dues help maintain our beautiful common areas and support community activities. Your contribution makes a real difference.</p>
       </div>
 
       <div class="dues-grid">
-        <div class="dues-card">
+        <div class="dues-card animate-on-scroll">
           <div class="dues-amount">
-            <div class="price">$150</div>
+            <div class="price">$42</div>
             <div class="period">per household, per year</div>
+            <small>(less than $4 a month)</small>
           </div>
           <div class="dues-info">
             <div class="dues-info-row">
@@ -1276,7 +1515,7 @@
           </div>
         </div>
 
-        <div class="payment-section">
+        <div class="payment-section animate-on-scroll" style="--anim-delay: 80ms">
           <h3>How to Pay</h3>
 
           <div class="payment-option">
@@ -1315,15 +1554,6 @@
               <p>Contact the board for the mailing address or to arrange drop-off.</p>
             </div>
           </div>
-
-          <div class="payment-help">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="12" y1="16" x2="12" y2="12"/>
-              <line x1="12" y1="8" x2="12.01" y2="8"/>
-            </svg>
-            <p><strong>Need a payment plan?</strong> Contact the board at <a href="mailto:admin@cedardalehoa.com">admin@cedardalehoa.com</a> to discuss options. We're happy to work with you.</p>
-          </div>
         </div>
       </div>
     </div>
@@ -1332,7 +1562,7 @@
   <!-- Events Section -->
   <section id="events">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header animate-on-scroll">
         <div class="section-label">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
@@ -1346,146 +1576,36 @@
         <p>Mark your calendar for community gatherings and HOA meetings. All residents are welcome to attend board meetings.</p>
       </div>
 
-      <div class="events-grid">
-        <article class="event-card">
-          <div class="event-card-inner">
-            <div class="event-date">
-              <span class="month">Apr</span>
-              <span class="day">13</span>
-            </div>
-            <div class="event-content">
-              <h4>Second Quarterly Board Meeting</h4>
-              <div class="event-meta">
-                <span class="event-time">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12 6 12 12 16 14"/>
-                  </svg>
-                  7:00 - 8:30 PM
-                </span>
-                <span class="event-badge upcoming">Upcoming</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="event-card">
-          <div class="event-card-inner">
-            <div class="event-date">
-              <span class="month">May</span>
-              <span class="day">23</span>
-            </div>
-            <div class="event-content">
-              <h4>Neighborhood Yard Sale</h4>
-              <div class="event-meta">
-                <span class="event-time">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12 6 12 12 16 14"/>
-                  </svg>
-                  8:00 AM - 2:00 PM
-                </span>
-                <span class="event-badge upcoming">Upcoming</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="event-card">
-          <div class="event-card-inner">
-            <div class="event-date">
-              <span class="month">Jul</span>
-              <span class="day">13</span>
-            </div>
-            <div class="event-content">
-              <h4>Third Quarterly Board Meeting</h4>
-              <div class="event-meta">
-                <span class="event-time">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12 6 12 12 16 14"/>
-                  </svg>
-                  7:00 - 8:30 PM
-                </span>
-                <span class="event-badge upcoming">Upcoming</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="event-card">
-          <div class="event-card-inner">
-            <div class="event-date">
-              <span class="month">Sep</span>
-              <span class="day">TBD</span>
-            </div>
-            <div class="event-content">
-              <h4>Fall Block Party</h4>
-              <div class="event-meta">
-                <span class="event-time">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12 6 12 12 16 14"/>
-                  </svg>
-                  Time TBD
-                </span>
-                <span class="event-badge tentative">Date TBD</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="event-card">
-          <div class="event-card-inner">
-            <div class="event-date">
-              <span class="month">Oct</span>
-              <span class="day">19</span>
-            </div>
-            <div class="event-content">
-              <h4>Fourth Quarterly Board Meeting</h4>
-              <div class="event-meta">
-                <span class="event-time">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12 6 12 12 16 14"/>
-                  </svg>
-                  7:00 - 8:30 PM
-                </span>
-                <span class="event-badge upcoming">Upcoming</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="event-card">
-          <div class="event-card-inner">
-            <div class="event-date">
-              <span class="month">Dec</span>
-              <span class="day">TBD</span>
-            </div>
-            <div class="event-content">
-              <h4>Holiday Lights Contest</h4>
-              <div class="event-meta">
-                <span class="event-time">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12 6 12 12 16 14"/>
-                  </svg>
-                  Judging mid-December
-                </span>
-                <span class="event-badge tentative">Date TBD</span>
-              </div>
-            </div>
-          </div>
-        </article>
+      <div class="events-grid" id="events-grid">
+        <!-- Events will be populated by JavaScript -->
       </div>
     </div>
   </section>
 
+  <!-- Modal -->
+  <div class="modal" id="eventModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title"></h3>
+        <button class="modal-close" onclick="closeModal()" aria-label="Close modal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Date:</strong> <span id="modal-date"></span></p>
+        <p><strong>Time:</strong> <span id="modal-time"></span></p>
+        <p><strong>Location:</strong> <span id="modal-location"></span></p>
+        <p><strong>Details:</strong> <span id="modal-details"></span></p>
+      </div>
+    </div>
+  </div>
+
   <!-- Newsletter Section -->
   <section id="newsletter">
     <div class="container">
-      <div class="newsletter-content">
+      <div class="newsletter-content animate-on-scroll">
         <div class="section-label">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -1506,10 +1626,10 @@
     </div>
   </section>
 
-  <!-- Resources Section -->
+  <!-- Resources + Contact Section -->
   <section id="resources">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header animate-on-scroll">
         <div class="section-label">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -1522,7 +1642,7 @@
       </div>
 
       <div class="resources-grid">
-        <a href="https://drive.google.com/drive/folders/1IsF9oFqw8tBmtP2yyxM6UI-R2-z4XSR-?usp=sharing" target="_blank" rel="noopener" class="resource-card">
+        <a href="https://drive.google.com/drive/folders/1IsF9oFqw8tBmtP2yyxM6UI-R2-z4XSR-?usp=sharing" target="_blank" rel="noopener" class="resource-card animate-on-scroll" style="--anim-delay: 60ms">
           <div class="resource-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
@@ -1542,7 +1662,7 @@
           </div>
         </a>
 
-        <a href="https://drive.google.com/drive/folders/1v-zi6AaeOhzBXzvarMnHoxYMWsll7br6?usp=drive_link" target="_blank" rel="noopener" class="resource-card">
+        <a href="https://drive.google.com/drive/folders/1v-zi6AaeOhzBXzvarMnHoxYMWsll7br6?usp=drive_link" target="_blank" rel="noopener" class="resource-card animate-on-scroll" style="--anim-delay: 120ms">
           <div class="resource-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -1565,7 +1685,7 @@
           </div>
         </a>
 
-        <a href="https://www.facebook.com/groups/690748179929570" target="_blank" rel="noopener" class="resource-card">
+        <a href="https://www.facebook.com/groups/690748179929570" target="_blank" rel="noopener" class="resource-card animate-on-scroll" style="--anim-delay: 180ms">
           <div class="resource-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M17 2h-3a5 5 0 0 0-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
@@ -1585,57 +1705,42 @@
           </div>
         </a>
       </div>
-    </div>
-  </section>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <div class="container">
-      <div class="section-header centered">
-        <div class="section-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
-          Get in Touch
+      <!-- Contact subsection -->
+      <div class="contact-subsection" id="contact">
+        <div class="contact-subsection-header animate-on-scroll">
+          <h3>Contact the Board</h3>
+          <p>Have questions, concerns, or suggestions? We're here to help.</p>
         </div>
-        <h2>Contact the HOA Board</h2>
-        <p>Have questions, concerns, or suggestions? We're here to help.</p>
-      </div>
-
-      <div class="contact-grid">
-        <div class="contact-card">
-          <div class="contact-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
+        <div class="contact-grid">
+          <div class="contact-card animate-on-scroll" style="--anim-delay: 60ms">
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div class="contact-card-body">
+              <h4>Email</h4>
+              <p>Best for general questions and non-urgent matters.</p>
+              <a href="mailto:admin@cedardalehoa.com">admin@cedardalehoa.com</a>
+            </div>
           </div>
-          <h4>Email</h4>
-          <p>Best for general questions and non-urgent matters.</p>
-          <a href="mailto:admin@cedardalehoa.com">admin@cedardalehoa.com</a>
-        </div>
-        <div class="contact-card">
-          <div class="contact-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M17 2h-3a5 5 0 0 0-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-            </svg>
+          <div class="contact-card animate-on-scroll" style="--anim-delay: 120ms">
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <div class="contact-card-body">
+              <h4>Board Meetings</h4>
+              <p>Attend a quarterly meeting to speak with the board in person.</p>
+              <a href="#events">View meeting schedule</a>
+            </div>
           </div>
-          <h4>Facebook</h4>
-          <p>Post in our group for quick responses from neighbors.</p>
-          <a href="https://www.facebook.com/groups/690748179929570" target="_blank" rel="noopener">Cedardale Facebook Group</a>
-        </div>
-        <div class="contact-card">
-          <div class="contact-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-              <line x1="16" y1="2" x2="16" y2="6"/>
-              <line x1="8" y1="2" x2="8" y2="6"/>
-              <line x1="3" y1="10" x2="21" y2="10"/>
-            </svg>
-          </div>
-          <h4>Board Meetings</h4>
-          <p>Attend a quarterly meeting to speak with the board.</p>
-          <a href="#events">View meeting schedule</a>
         </div>
       </div>
     </div>
@@ -1648,7 +1753,7 @@
         <div class="footer-brand">
           <picture>
             <source srcset="images/cedardale-logo.webp" type="image/webp">
-            <img src="images/cedardale-logo.png" alt="Cedardale HOA" width="150" height="38">
+            <img src="images/cedardale-logo.png" alt="Cedardale HOA" width="150" height="38" loading="lazy" decoding="async">
           </picture>
           <span>Knoxville, TN</span>
         </div>
@@ -1661,10 +1766,71 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Cedardale Neighborhood HOA. All rights reserved.</p>
+        <p>&copy; <time datetime="2026">2026</time> Cedardale Neighborhood HOA. All rights reserved.</p>
       </div>
     </div>
   </footer>
+
+  <script type="application/json" id="events-data">
+  [
+    {
+      "title": "Neighborhood Service Morning",
+      "date": "2026-03-21",
+      "time": "9:00 AM - 12:00 PM",
+      "location": "Cedardale Park",
+      "details": "Join us for a community service morning cleaning up the park and planting flowers.",
+      "status": "past"
+    },
+    {
+      "title": "Neighborhood Easter Egg Hunt",
+      "date": "2026-04-04",
+      "time": "10:00 AM - 12:00 PM",
+      "location": "Cedardale Park",
+      "details": "Fun Easter egg hunt for families with prizes and refreshments.",
+      "status": "past"
+    },
+    {
+      "title": "Spring Yard Sale & Donation Pick-Up",
+      "date": "2026-05-16",
+      "time": "8:00 AM - 2:00 PM",
+      "location": "Various locations",
+      "details": "Neighborhood yard sale with donation pick-up. Karm pickup at 2pm.",
+      "status": "upcoming"
+    },
+    {
+      "title": "Fall Yard Sale & Donation Pick-Up",
+      "date": "2026-09-12",
+      "time": "8:00 AM - 2:00 PM",
+      "location": "Various locations",
+      "details": "Fall neighborhood yard sale with donation pick-up.",
+      "status": "upcoming"
+    },
+    {
+      "title": "Halloween Hangout (Chili Potluck & Competition!)",
+      "date": "2026-10-31",
+      "time": "5:00 - 8:00 PM",
+      "location": "Cedardale Park",
+      "details": "Halloween chili potluck and competition. Bring your best chili recipe!",
+      "status": "upcoming"
+    },
+    {
+      "title": "Cedardale Thanksgiving Food Drive",
+      "date": "2026-11-01",
+      "time": "All month",
+      "location": "Various drop-off points",
+      "details": "Community food drive to help local families. Drop-off locations TBA.",
+      "status": "upcoming"
+    },
+    {
+      "title": "Christmas Light Competition & Cocoa Social",
+      "date": "2026-12-12",
+      "time": "6:00 - 9:00 PM",
+      "location": "Cedardale Park",
+      "details": "Christmas light competition judging and cocoa social event.",
+      "status": "upcoming"
+    }
+  ]
+  </script>
 
   <script>
     function openMenu() {
@@ -1698,7 +1864,139 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeMenu();
     });
+
+    // Scroll entrance animations
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => animObserver.observe(el));
+
+    // Events functionality
+    const eventsData = JSON.parse(document.getElementById('events-data').textContent);
+    const eventsGrid = document.getElementById('events-grid');
+    const currentDate = new Date('2026-04-18'); // Current date for comparison
+
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      const month = date.toLocaleString('default', { month: 'short' });
+      const day = date.getDate();
+      return { month, day };
+    }
+
+    function isUpcoming(dateStr) {
+      const eventDate = new Date(dateStr);
+      return eventDate > currentDate;
+    }
+
+    function renderEvents() {
+      eventsGrid.innerHTML = '';
+      const upcomingEvents = eventsData.filter(event => isUpcoming(event.date));
+      upcomingEvents.forEach((event, i) => {
+        const { month, day } = formatDate(event.date);
+        const status = event.status === 'tentative' ? 'tentative' : 'upcoming';
+
+        const eventCard = document.createElement('article');
+        eventCard.className = 'event-card animate-on-scroll';
+        eventCard.style.setProperty('--anim-delay', `${i * 60}ms`);
+        eventCard.innerHTML = `
+          <div class="event-card-inner">
+            <div class="event-date">
+              <span class="month">${month}</span>
+              <span class="day">${day}</span>
+            </div>
+            <div class="event-content">
+              <h4>${event.title}</h4>
+              <div class="event-meta">
+                <span class="event-time">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  ${event.time}
+                </span>
+                <span class="event-badge ${status}">${status === 'upcoming' ? 'Upcoming' : 'Date TBD'}</span>
+              </div>
+            </div>
+          </div>
+        `;
+        eventCard.addEventListener('click', () => openModal(event));
+        eventsGrid.appendChild(eventCard);
+        animObserver.observe(eventCard);
+      });
+    }
+
+    function openModal(event) {
+      const eventDate = new Date(event.date);
+      const dayName = eventDate.toLocaleDateString('en-US', { weekday: 'long' });
+      const formattedDate = eventDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      document.getElementById('modal-title').textContent = event.title;
+      document.getElementById('modal-date').textContent = `${dayName}, ${formattedDate}`;
+      document.getElementById('modal-time').textContent = event.time;
+      document.getElementById('modal-location').textContent = event.location;
+      document.getElementById('modal-details').textContent = event.details;
+      document.getElementById('eventModal').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('eventModal').classList.remove('open');
+    }
+
+    // Close modal on click outside or escape
+    document.getElementById('eventModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && document.getElementById('eventModal').classList.contains('open')) {
+        closeModal();
+      }
+    });
+
+    function renderHeroCard() {
+      const next = eventsData.find(e => isUpcoming(e.date));
+      if (!next) return;
+      const eventDate = new Date(next.date);
+      const formatted = eventDate.toLocaleDateString('en-US', { weekday: 'short', month: 'long', day: 'numeric' });
+      document.getElementById('hero-event-title').textContent = next.title;
+      document.getElementById('hero-event-date').textContent = formatted;
+      document.getElementById('hero-event-time').textContent = next.time;
+      document.getElementById('hero-event-location').textContent = next.location;
+      // Populate before first paint, then fade in after browser has rendered once
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.getElementById('hero-next-event').classList.add('loaded');
+        });
+      });
+    }
+
+    // Initialize
+    renderEvents();
+    renderHeroCard();
   </script>
+
+  <!-- Default Statcounter code for Cedardale HOA https://www.cedardalehoa.com/-->
+  <script type="text/javascript">
+  var sc_project=13223090;
+  var sc_invisible=1;
+  var sc_security="8b37176a";
+  </script>
+  <script type="text/javascript"
+  src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript><div class="statcounter"><a title="Web Analytics"
+  href="https://statcounter.com/" target="_blank"><img class="statcounter"
+  src="https://c.statcounter.com/13223090/0/8b37176a/1/" alt="Web Analytics"
+  referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+  <!-- End of Statcounter Code -->
+
+
 </body>
 
 </html>
