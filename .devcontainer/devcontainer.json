@@ -1,0 +1,27 @@
+{
+  "name": "Cedardale HOA - Next.js",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20-bookworm",
+  "forwardPorts": [3000, 3333],
+  "portsAttributes": {
+    "3000": {
+      "label": "Next.js Dev Server",
+      "onAutoForward": "openBrowser"
+    },
+    "3333": {
+      "label": "Sanity Studio",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "sudo chown -R node:node /workspaces/cedardalehoa && npm install -g sanity@latest && cd nextjs && npm install && cd ../sanity-studio && npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "sanity-io.vscode-sanity"
+      ]
+    }
+  },
+  "remoteUser": "node"
+}
