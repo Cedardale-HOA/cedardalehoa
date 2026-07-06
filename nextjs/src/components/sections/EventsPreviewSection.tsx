@@ -9,6 +9,8 @@ interface EventsPreviewSectionProps {
 }
 
 export default function EventsPreviewSection({ events }: EventsPreviewSectionProps) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <section id="events" style={{ padding: "5rem 0", background: "#fff" }}>
       <div style={{ width: "100%", maxWidth: "1140px", margin: "0 auto", padding: "0 1.5rem" }}>
@@ -21,7 +23,7 @@ export default function EventsPreviewSection({ events }: EventsPreviewSectionPro
                 <line x1="8" y1="2" x2="8" y2="6" />
                 <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
-              2026 Calendar
+              {currentYear} Calendar
             </div>
             <h2 style={{ fontSize: "clamp(1.5rem, 3.5vw, 2rem)", fontWeight: 700, marginBottom: "0.75rem" }}>Upcoming Events</h2>
             <p style={{ fontSize: "1.1rem", color: "var(--text-secondary)" }}>

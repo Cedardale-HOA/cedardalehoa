@@ -1,13 +1,14 @@
 import type { SiteSetting } from "@/types/sanity";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
 import Link from "next/link";
+import { safeNewsletterUrl } from "@/lib/url";
 
 interface NewsletterSectionProps {
   settings: SiteSetting | null;
 }
 
 export default function NewsletterSection({ settings }: NewsletterSectionProps) {
-  const url = settings?.newsletterUrl ?? "http://eepurl.com/jexX46";
+  const url = safeNewsletterUrl(settings?.newsletterUrl);
 
   return (
     <section

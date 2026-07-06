@@ -1,7 +1,28 @@
+# Local environment files (secrets)
 .env
 .env.local
 .env*.local
+.env*
+
+# Allow checked-in templates
+!.env.example
+!.env.sample
+
+# Local tooling state
+.vercel
+.sanity/
+
+# Build artifacts and dependencies
 node_modules/
 .next/
-.sanity/
 dist/
+
+# Local key material
+*.pem
+*.key
+
+# Sensitive planning artifacts (local audit/cutover notes)
+CLI_AUDIT_*.md
+PUBLISH_PREP_*.md
+ROLLBACK_BASELINE.md
+ROLLBACK.md

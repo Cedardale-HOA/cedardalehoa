@@ -5,15 +5,29 @@ How to deploy the Next.js site to Vercel and cut over from the current static si
 **Your setup:**
 - Domain DNS managed by Cloudflare (already pointing to Vercel — no DNS changes needed)
 - Static site already live on Vercel from this same repo
-- Next.js site in `nextjs-cedardale-hoa-website/`, not yet on `main`
-- Sanity content already populated at project `xwrx4h71`
+- Next.js site in `nextjs/`, not yet on `main`
+- Sanity content already populated in your Sanity project
 
 ---
 
 ## Prerequisites
 
 - [ ] Access to the [Vercel dashboard](https://vercel.com/dashboard) for this project
-- [ ] The `SANITY_API_TOKEN` value from your local `nextjs-cedardale-hoa-website/.env.local`
+- [ ] The `SANITY_API_TOKEN` value from your local `nextjs/.env.local`
+- [ ] Rollback readiness completed per `ROLLBACK.md` (required before implementation/cutover)
+
+---
+
+## Phase 0 — Mandatory Rollback Readiness
+
+Do not continue until this phase is complete:
+
+- [ ] Capture baseline artifacts (current production commit SHA, last known-good Vercel deployment ID, production settings snapshot)
+- [ ] Assign rollback owners (incident commander, GitHub, Vercel, Sanity)
+- [ ] Perform rollback dry run in preview/staging
+- [ ] Record dry-run evidence in cutover PR
+
+Reference runbook: `ROLLBACK.md`
 
 ---
 
@@ -91,7 +105,7 @@ This is the cutover step. Changing the Root Directory immediately triggers a red
 2. Find **Root Directory** — currently blank or `/`
 3. Click **Edit** and set it to:
    ```
-   nextjs-cedardale-hoa-website
+   nextjs
    ```
 4. Click **Save**
 
@@ -133,7 +147,7 @@ git merge your-branch-name
 git push origin main
 ```
 
-Future Vercel deployments will build from `nextjs-cedardale-hoa-website/` on `main`.
+Future Vercel deployments will build from `nextjs/` on `main`.
 
 ---
 
@@ -164,9 +178,9 @@ git push
 
 | | |
 |---|---|
-| Run site locally | `cd nextjs-cedardale-hoa-website && npm run dev` |
+| Run site locally | `cd nextjs && npm run dev` |
 | Run Studio locally | `cd sanity-studio && npm run dev` |
 | Manage content | `https://cedardale-hoa.sanity.studio` *(or your chosen hostname)* |
 | Vercel dashboard | `https://vercel.com/dashboard` |
-| Sanity project | `https://sanity.io/manage/project/xwrx4h71` |
+| Sanity project | `https://sanity.io/manage/project/<your-project-id>` |
 | Rotate API token | Sanity → API → Tokens → delete old → create new → update in Vercel env vars |

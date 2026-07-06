@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import type { SiteSetting } from "@/types/sanity";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
 import Link from "next/link";
@@ -9,10 +9,7 @@ interface DuesSectionProps {
 }
 
 export default function DuesSection({ settings }: DuesSectionProps) {
-  const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
-    setMounted(true);
     if (document.querySelector('script[src*="zeffy-embed"]')) return;
     const script = document.createElement("script");
     script.src = "https://www.zeffy.com/embed/v2/zeffy-embed.js";
@@ -200,12 +197,10 @@ export default function DuesSection({ settings }: DuesSectionProps) {
           {/* Online payment — Zeffy (primary featured method) */}
           <AnimateOnScroll delay={80}>
             <div>
-              {mounted && (
-                <div
-                  data-zeffy-embed
-                  data-form-url="/embed/ticketing/cedardale-hoas-memberships-2"
-                ></div>
-              )}
+              <div
+                data-zeffy-embed
+                data-form-url="/embed/ticketing/cedardale-hoas-memberships-2"
+              ></div>
               <div data-zeffy-embed-fallback style={{ display: "none" }}>
                 {" "}
                 <div style={{ position: "relative", overflow: "hidden", height: "450px", width: "100%", paddingTop: "450px" }}>

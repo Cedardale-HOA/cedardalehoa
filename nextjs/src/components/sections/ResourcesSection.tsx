@@ -2,15 +2,19 @@
 import type { SiteSetting } from "@/types/sanity";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
 import Link from "next/link";
+import { safeExternalUrl } from "@/lib/url";
 
 interface ResourcesSectionProps {
   settings: SiteSetting | null;
 }
 
 export default function ResourcesSection({ settings }: ResourcesSectionProps) {
-  const hoaDocsUrl = settings?.hoaDocumentsUrl ?? "https://drive.google.com/drive/folders/1IsF9oFqw8tBmtP2yyxM6UI-R2-z4XSR-";
-  const minutesUrl = settings?.meetingMinutesUrl ?? "https://drive.google.com/drive/folders/1v-zi6AaeOhzBXzvarMnHoxYMWsll7br6";
-  const facebookUrl = settings?.facebookGroupUrl ?? "https://www.facebook.com/groups/690748179929570";
+  const hoaDocsFallback = "https://drive.google.com/drive/folders/1IsF9oFqw8tBmtP2yyxM6UI-R2-z4XSR-";
+  const minutesFallback = "https://drive.google.com/drive/folders/1v-zi6AaeOhzBXzvarMnHoxYMWsll7br6";
+  const facebookFallback = "https://www.facebook.com/groups/690748179929570";
+  const hoaDocsUrl = safeExternalUrl(settings?.hoaDocumentsUrl, hoaDocsFallback);
+  const minutesUrl = safeExternalUrl(settings?.meetingMinutesUrl, minutesFallback);
+  const facebookUrl = safeExternalUrl(settings?.facebookGroupUrl, facebookFallback);
   const contactEmail = settings?.contactEmail ?? "admin@cedardalehoa.com";
 
   const resources = [

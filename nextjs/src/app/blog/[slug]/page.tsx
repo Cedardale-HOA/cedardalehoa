@@ -11,8 +11,12 @@ import type { Metadata } from "next";
 const OPTIONS = { next: { revalidate: 60 } };
 
 export async function generateStaticParams() {
-  const posts = await client.fetch<SanityPost[]>(POSTS_QUERY, {}, OPTIONS);
-  return posts.map((post) => ({ slug: post.slug.current }));
+  try {
+    const posts = await client.fetch<SanityPost[]>(POSTS_QUERY, {}, OPTIONS);
+    return posts.map((post) => ({ slug: post.slug.current }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({
@@ -21,12 +25,19 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await client.fetch<SanityPost | null>(POST_QUERY, { slug }, OPTIONS);
-  if (!post) return {};
-  return {
-    title: `${post.title} | Cedardale HOA Blog`,
-    description: post.excerpt,
-  };
+  try {
+    const post = await client.fetch<SanityPost | null>(POST_QUERY, { slug }, OPTIONS);
+    if (!post) return {};
+    return {
+      title: `${post.title} | Cedardale HOA Blog`,
+      description: post.excerpt,
+    };
+  } catch {
+    return {
+      title: "Blog Post | Cedardale HOA",
+      description: "A post from the Cedardale HOA blog.",
+    };
+  }
 }
 
 export default async function PostPage({
@@ -35,9 +46,29 @@ export default async function PostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await client.fetch<SanityPost | null>(POST_QUERY, { slug }, OPTIONS);
+  let post: SanityPost | null = null;
+  let dataUnavailable = false;
 
-  if (!post) notFound();
+  try {
+    post = await client.fetch<SanityPost | null>(POST_QUERY, { slug }, OPTIONS);
+  } catch {
+    dataUnavailable = true;
+  }
+
+  if (!post) {
+    if (!dataUnavailable) notFound();
+
+    return (
+      <div style={{ maxWidth: "800px", margin: "0 auto", padding: "8rem 1.5rem 5rem" }}>
+        <div style={{ background: "#fff8e1", color: "#6d4c00", border: "1px solid #f1dd9f", borderRadius: "var(--radius)", padding: "1rem 1.25rem", marginBottom: "1.5rem" }}>
+          This post is temporarily unavailable. Please try again shortly.
+        </div>
+        <Link href="/blog" style={{ color: "var(--green)", fontWeight: 600 }}>
+          Back to Blog
+        </Link>
+      </div>
+    );
+  }
 
   const imageUrl = post.image ? urlFor(post.image)?.width(1200).height(630).url() : null;
 

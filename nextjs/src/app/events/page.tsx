@@ -12,7 +12,14 @@ export const metadata: Metadata = {
 const OPTIONS = { next: { revalidate: 60 } };
 
 export default async function EventsPage() {
-  const events = await client.fetch<SanityEvent[]>(EVENTS_QUERY, {}, OPTIONS);
+  let events: SanityEvent[] = [];
+  let dataUnavailable = false;
+
+  try {
+    events = await client.fetch<SanityEvent[]>(EVENTS_QUERY, {}, OPTIONS);
+  } catch {
+    dataUnavailable = true;
+  }
 
   const today = new Date().toISOString().split("T")[0];
   const upcoming = events.filter((e) => e.status !== "past" && e.date >= today);
@@ -58,6 +65,12 @@ export default async function EventsPage() {
       </div>
 
       <div style={{ maxWidth: "1140px", margin: "0 auto", padding: "3.5rem 1.5rem 5rem" }}>
+        {dataUnavailable && (
+          <div style={{ background: "#fff8e1", color: "#6d4c00", border: "1px solid #f1dd9f", borderRadius: "var(--radius)", padding: "0.75rem 1rem", marginBottom: "1.5rem", fontSize: "0.9rem" }}>
+            Event data is temporarily unavailable. Please check back shortly.
+          </div>
+        )}
+
         {/* Upcoming */}
         {upcoming.length > 0 && (
           <section style={{ marginBottom: "4rem" }}>

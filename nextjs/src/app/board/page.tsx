@@ -1,6 +1,6 @@
 import { client } from "@/sanity/client";
-import { BOARD_MEMBERS_QUERY } from "@/sanity/queries";
-import type { SanityBoardMember } from "@/types/sanity";
+import { BOARD_MEMBERS_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/queries";
+import type { SanityBoardMember, SiteSetting } from "@/types/sanity";
 import { urlFor } from "@/sanity/image";
 import Image from "next/image";
 import type { Metadata } from "next";
@@ -13,7 +13,22 @@ export const metadata: Metadata = {
 const OPTIONS = { next: { revalidate: 60 } };
 
 export default async function BoardPage() {
-  const members = await client.fetch<SanityBoardMember[]>(BOARD_MEMBERS_QUERY, {}, OPTIONS);
+  let members: SanityBoardMember[] = [];
+  let settings: SiteSetting | null = null;
+  let dataUnavailable = false;
+
+  try {
+    const [memberList, siteSettings] = await Promise.all([
+      client.fetch<SanityBoardMember[]>(BOARD_MEMBERS_QUERY, {}, OPTIONS),
+      client.fetch<SiteSetting | null>(SITE_SETTINGS_QUERY, {}, OPTIONS),
+    ]);
+    members = memberList;
+    settings = siteSettings;
+  } catch {
+    dataUnavailable = true;
+  }
+
+  const boardEmail = settings?.contactEmail ?? "admin@cedardalehoa.com";
 
   return (
     <>
@@ -55,6 +70,12 @@ export default async function BoardPage() {
       </div>
 
       <div style={{ maxWidth: "1140px", margin: "0 auto", padding: "3.5rem 1.5rem 5rem" }}>
+        {dataUnavailable && (
+          <div style={{ background: "#fff8e1", color: "#6d4c00", border: "1px solid #f1dd9f", borderRadius: "var(--radius)", padding: "0.75rem 1rem", marginBottom: "1.5rem", fontSize: "0.9rem" }}>
+            Board information is temporarily unavailable. Please check back shortly.
+          </div>
+        )}
+
         {members.length === 0 ? (
           <div style={{ textAlign: "center", padding: "5rem 0", color: "var(--text-muted)" }}>
             <p>Board member information coming soon.</p>
@@ -181,7 +202,7 @@ export default async function BoardPage() {
             We&apos;re happy to help. Reach out by email or attend a quarterly meeting.
           </p>
           <a
-            href="mailto:admin@cedardalehoa.com"
+            href={`mailto:${boardEmail}`}
             style={{
               display: "inline-flex",
               alignItems: "center",

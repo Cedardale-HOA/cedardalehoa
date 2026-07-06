@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -16,8 +16,12 @@ const navLinks = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const openButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
-  // Close menu on route change / escape
+  // Close menu on escape
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setMenuOpen(false);
@@ -30,6 +34,55 @@ export default function Header() {
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  // Manage focus when dialog opens/closes
+  useEffect(() => {
+    if (menuOpen) {
+      previousFocusRef.current = document.activeElement as HTMLElement | null;
+      closeButtonRef.current?.focus();
+      return;
+    }
+
+    previousFocusRef.current?.focus();
+    previousFocusRef.current = null;
+  }, [menuOpen]);
+
+  // Keep keyboard focus trapped within the mobile menu when open
+  useEffect(() => {
+    if (!menuOpen || !menuRef.current) return;
+
+    const container = menuRef.current;
+    const focusableSelector =
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+    const handleTrap = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      const focusable = Array.from(
+        container.querySelectorAll<HTMLElement>(focusableSelector)
+      ).filter((el) => !el.hasAttribute("disabled") && el.getAttribute("aria-hidden") !== "true");
+
+      if (focusable.length === 0) {
+        e.preventDefault();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleTrap);
+    return () => document.removeEventListener("keydown", handleTrap);
   }, [menuOpen]);
 
   return (
@@ -102,9 +155,12 @@ export default function Header() {
 
             {/* Hamburger */}
             <button
+              ref={openButtonRef}
               className="md:hidden"
               onClick={() => setMenuOpen(true)}
               aria-label="Open navigation menu"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-navigation-dialog"
               style={{ background: "none", border: "none", cursor: "pointer", padding: "0.5rem", color: "var(--text)" }}
             >
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -117,9 +173,12 @@ export default function Header() {
 
       {/* Mobile menu */}
       <div
+        id="mobile-navigation-dialog"
+        ref={menuRef}
         role="dialog"
         aria-label="Navigation menu"
         aria-modal="true"
+        tabIndex={-1}
         style={{
           position: "fixed",
           top: 0,
@@ -147,6 +206,7 @@ export default function Header() {
             Menu
           </span>
           <button
+            ref={closeButtonRef}
             onClick={() => setMenuOpen(false)}
             aria-label="Close navigation menu"
             style={{ background: "none", border: "none", cursor: "pointer", padding: "0.5rem", color: "var(--text)" }}

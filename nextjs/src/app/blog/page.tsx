@@ -12,7 +12,14 @@ export const metadata: Metadata = {
 const OPTIONS = { next: { revalidate: 60 } };
 
 export default async function BlogPage() {
-  const posts = await client.fetch<SanityPost[]>(POSTS_QUERY, {}, OPTIONS);
+  let posts: SanityPost[] = [];
+  let dataUnavailable = false;
+
+  try {
+    posts = await client.fetch<SanityPost[]>(POSTS_QUERY, {}, OPTIONS);
+  } catch {
+    dataUnavailable = true;
+  }
 
   return (
     <>
@@ -54,6 +61,12 @@ export default async function BlogPage() {
       </div>
 
       <div style={{ maxWidth: "1140px", margin: "0 auto", padding: "3.5rem 1.5rem 5rem" }}>
+        {dataUnavailable && (
+          <div style={{ background: "#fff8e1", color: "#6d4c00", border: "1px solid #f1dd9f", borderRadius: "var(--radius)", padding: "0.75rem 1rem", marginBottom: "1.5rem", fontSize: "0.9rem" }}>
+            Blog content is temporarily unavailable. Please check back shortly.
+          </div>
+        )}
+
         {posts.length === 0 ? (
           <div style={{ textAlign: "center", padding: "5rem 0", color: "var(--text-muted)" }}>
             <p>No posts yet. Check back soon!</p>
