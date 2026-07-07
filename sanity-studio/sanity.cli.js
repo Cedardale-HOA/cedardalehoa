@@ -6,6 +6,7 @@ export default defineCliConfig({
     dataset: 'production'
   },
   deployment: {
+    appId: 'k5ecalizsc5spio0e0rvtxe9',
     autoUpdates: false,
   }
 })

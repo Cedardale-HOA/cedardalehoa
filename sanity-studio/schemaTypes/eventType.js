@@ -35,21 +35,6 @@ export const eventType = defineType({
       type: 'text',
       rows: 4,
     }),
-    defineField({
-      name: 'status',
-      title: 'Status',
-      type: 'string',
-      options: {
-        list: [
-          {title: 'Upcoming', value: 'upcoming'},
-          {title: 'Past', value: 'past'},
-          {title: 'Tentative', value: 'tentative'},
-        ],
-        layout: 'radio',
-      },
-      initialValue: 'upcoming',
-      validation: (rule) => rule.required(),
-    }),
   ],
   orderings: [
     {
@@ -67,12 +52,11 @@ export const eventType = defineType({
     select: {
       title: 'title',
       date: 'date',
-      status: 'status',
     },
-    prepare({title, date, status}) {
+    prepare({title, date}) {
       return {
         title,
-        subtitle: `${date ?? 'No date'} — ${status ?? ''}`,
+        subtitle: date ?? 'No date',
       }
     },
   },
