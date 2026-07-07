@@ -14,18 +14,18 @@ export default function NewsletterSection() {
           <div style={{ textAlign: "center", maxWidth: "900px", margin: "0 auto" }}>
             <style>{`
               .newsletter-embed-frame {
-                height: 700px;
+                height: 620px;
               }
 
               @media (max-width: 900px) {
                 .newsletter-embed-frame {
-                  height: 780px;
+                  height: 700px;
                 }
               }
 
               @media (max-width: 640px) {
                 .newsletter-embed-frame {
-                  height: 920px;
+                  height: 820px;
                 }
               }
             `}</style>
