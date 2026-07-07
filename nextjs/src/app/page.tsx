@@ -48,7 +48,7 @@ export default async function HomePage() {
       <AboutSection settings={settings} />
       <DuesSection settings={settings} />
       <EventsPreviewSection events={upcomingEvents ?? []} />
-      <NewsletterSection settings={settings} />
+      <NewsletterSection />
       <ResourcesSection settings={settings} />
     </>
   );
