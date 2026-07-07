@@ -19,7 +19,6 @@ function getDay(dateStr: string) {
 const badgeColors: Record<string, { bg: string; color: string }> = {
   upcoming: { bg: "#e8f5ec", color: "#2e7d4f" },
   past: { bg: "#f0f0f0", color: "#666" },
-  tentative: { bg: "#fff8e1", color: "#8a6400" },
 };
 
 interface EventCardProps {
@@ -28,7 +27,9 @@ interface EventCardProps {
 }
 
 export default function EventCard({ event, showDetails = false }: EventCardProps) {
-  const badge = badgeColors[event.status] ?? badgeColors.upcoming;
+  const today = new Date().toISOString().split("T")[0];
+  const derivedStatus = event.date < today ? "past" : "upcoming";
+  const badge = badgeColors[derivedStatus] ?? badgeColors.upcoming;
 
   return (
     <div
@@ -92,7 +93,7 @@ export default function EventCard({ event, showDetails = false }: EventCardProps
                 textTransform: "capitalize",
               }}
             >
-              {event.status}
+              {derivedStatus}
             </span>
           </div>
 

@@ -21,28 +21,7 @@ export const EVENTS_QUERY = `*[_type == "event"] | order(date asc){
   date,
   time,
   location,
-  details,
-  status
-}`;
-
-export const NEXT_EVENT_QUERY = `*[_type == "event" && status == "upcoming"] | order(date asc)[0]{
-  _id,
-  title,
-  date,
-  time,
-  location,
-  details,
-  status
-}`;
-
-export const UPCOMING_EVENTS_QUERY = `*[_type == "event" && status == "upcoming"] | order(date asc)[0...5]{
-  _id,
-  title,
-  date,
-  time,
-  location,
-  details,
-  status
+  details
 }`;
 
 export const POSTS_QUERY = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc){

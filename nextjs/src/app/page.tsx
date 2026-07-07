@@ -1,8 +1,7 @@
 import { client } from "@/sanity/client";
 import {
   SITE_SETTINGS_QUERY,
-  NEXT_EVENT_QUERY,
-  UPCOMING_EVENTS_QUERY,
+  EVENTS_QUERY,
 } from "@/sanity/queries";
 import type { SiteSetting, SanityEvent } from "@/types/sanity";
 import HeroSection from "@/components/sections/HeroSection";
@@ -22,14 +21,17 @@ export default async function HomePage() {
   let dataUnavailable = false;
 
   try {
-    const [siteSettings, upcoming, events] = await Promise.all([
+    const [siteSettings, events] = await Promise.all([
       client.fetch<SiteSetting | null>(SITE_SETTINGS_QUERY, {}, OPTIONS),
-      client.fetch<SanityEvent | null>(NEXT_EVENT_QUERY, {}, OPTIONS),
-      client.fetch<SanityEvent[]>(UPCOMING_EVENTS_QUERY, {}, OPTIONS),
+      client.fetch<SanityEvent[]>(EVENTS_QUERY, {}, OPTIONS),
     ]);
+
+    const today = new Date().toISOString().split("T")[0];
+    const upcomingByDate = (events ?? []).filter((event) => event.date >= today);
+
     settings = siteSettings;
-    nextEvent = upcoming;
-    upcomingEvents = events ?? [];
+    nextEvent = upcomingByDate[0] ?? null;
+    upcomingEvents = upcomingByDate.slice(0, 5);
   } catch {
     dataUnavailable = true;
   }

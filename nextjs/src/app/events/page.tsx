@@ -22,8 +22,8 @@ export default async function EventsPage() {
   }
 
   const today = new Date().toISOString().split("T")[0];
-  const upcoming = events.filter((e) => e.status !== "past" && e.date >= today);
-  const past = events.filter((e) => e.status === "past" || e.date < today).reverse();
+  const upcoming = events.filter((e) => e.date >= today);
+  const past = events.filter((e) => e.date < today).reverse();
 
   return (
     <>

@@ -5,7 +5,6 @@ export interface SanityEvent {
   time?: string;
   location?: string;
   details?: string;
-  status: "upcoming" | "past" | "tentative";
 }
 
 export interface SanityPost {

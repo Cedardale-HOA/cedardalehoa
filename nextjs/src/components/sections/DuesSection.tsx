@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type { SiteSetting } from "@/types/sanity";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
 import Link from "next/link";
@@ -8,18 +8,122 @@ interface DuesSectionProps {
   settings: SiteSetting | null;
 }
 
-export default function DuesSection({ settings }: DuesSectionProps) {
-  useEffect(() => {
-    if (document.querySelector('script[src*="zeffy-embed"]')) return;
-    const script = document.createElement("script");
-    script.src = "https://www.zeffy.com/embed/v2/zeffy-embed.js";
-    script.async = true;
-    script.onerror = () => {
-      document
-        .querySelectorAll("[data-zeffy-embed-fallback]")
-        .forEach((el) => ((el as HTMLElement).style.display = "block"));
+const ZEFFY_SCRIPT_SRC = "https://www.zeffy.com/embed/v2/zeffy-embed.js";
+const ZEFFY_INIT_CHECK_DELAY_MS = 500;
+const ZEFFY_FALLBACK_TIMEOUT_MS = 12000;
+
+type ZeffyWindow = Window & {
+  Zeffy?: {
+    embed?: {
+      init?: () => void;
     };
+  };
+};
+
+let zeffyScriptReadyPromise: Promise<void> | null = null;
+
+function canInitZeffy() {
+  return typeof window !== "undefined" && !!(window as ZeffyWindow).Zeffy?.embed?.init;
+}
+
+function ensureZeffyScript(): Promise<void> {
+  if (canInitZeffy()) {
+    return Promise.resolve();
+  }
+
+  if (zeffyScriptReadyPromise) {
+    return zeffyScriptReadyPromise;
+  }
+
+  zeffyScriptReadyPromise = new Promise<void>((resolve, reject) => {
+    const existing = document.querySelector<HTMLScriptElement>(
+      `script[src="${ZEFFY_SCRIPT_SRC}"]`
+    );
+
+    const script = existing ?? document.createElement("script");
+
+    const onLoad = () => resolve();
+    const onError = () => {
+      zeffyScriptReadyPromise = null;
+      reject(new Error("Failed to load Zeffy embed script"));
+    };
+
+    if (existing) {
+      if (canInitZeffy()) {
+        resolve();
+        return;
+      }
+      existing.addEventListener("load", onLoad, { once: true });
+      existing.addEventListener("error", onError, { once: true });
+      return;
+    }
+
+    script.src = ZEFFY_SCRIPT_SRC;
+    script.async = true;
+    script.addEventListener("load", onLoad, { once: true });
+    script.addEventListener("error", onError, { once: true });
     document.body.appendChild(script);
+  });
+
+  return zeffyScriptReadyPromise;
+}
+
+export default function DuesSection({ settings }: DuesSectionProps) {
+  const embedRef = useRef<HTMLDivElement>(null);
+  const fallbackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const embedContainer = embedRef.current;
+    const fallbackContainer = fallbackRef.current;
+    if (!embedContainer || !fallbackContainer) return;
+
+    const showFallback = () => {
+      fallbackContainer.style.display = "block";
+    };
+
+    const hideFallback = () => {
+      fallbackContainer.style.display = "none";
+    };
+
+    const hasPrimaryIframe = () => !!embedContainer.querySelector("iframe");
+
+    const safeInit = () => {
+      (window as ZeffyWindow).Zeffy?.embed?.init?.();
+    };
+
+    hideFallback();
+
+    const fallbackTimeout = window.setTimeout(() => {
+      if (cancelled || hasPrimaryIframe()) return;
+      showFallback();
+    }, ZEFFY_FALLBACK_TIMEOUT_MS);
+
+    ensureZeffyScript()
+      .then(() => {
+        if (cancelled) return;
+        safeInit();
+
+        window.setTimeout(() => {
+          if (cancelled) return;
+          if (hasPrimaryIframe()) {
+            hideFallback();
+            return;
+          }
+          showFallback();
+        }, ZEFFY_INIT_CHECK_DELAY_MS);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          showFallback();
+        }
+      });
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(fallbackTimeout);
+    };
   }, []);
 
   const amount = settings?.duesAmount ?? "$42";
@@ -198,10 +302,16 @@ export default function DuesSection({ settings }: DuesSectionProps) {
           <AnimateOnScroll delay={80}>
             <div>
               <div
+                ref={embedRef}
+                data-testid="zeffy-embed-container"
                 data-zeffy-embed
                 data-form-url="/embed/ticketing/cedardale-hoas-memberships-2"
               ></div>
-              <div data-zeffy-embed-fallback style={{ display: "none" }}>
+              <div
+                ref={fallbackRef}
+                data-testid="zeffy-embed-fallback"
+                style={{ display: "none" }}
+              >
                 {" "}
                 <div style={{ position: "relative", overflow: "hidden", height: "450px", width: "100%", paddingTop: "450px" }}>
                   <iframe
